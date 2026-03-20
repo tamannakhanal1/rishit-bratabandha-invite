@@ -376,7 +376,7 @@ async function submitRSVP(){
   const btn=document.getElementById('sub-btn');
   btn.textContent='Sending…';btn.disabled=true;
   try{
-    await fetch('https://formspree.io/f/tamannahkhanal@gmail.com',{
+    await fetch('https://formspree.io/f/mbdzbwvl',{
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({name,guests,attendance:attendance==='yes'?'I Shall Attend':'Unable to Attend',_subject:'Bratabandha RSVP — '+name})
