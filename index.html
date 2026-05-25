@@ -19,70 +19,75 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 .oval-page{position:relative;z-index:2;width:100%;height:100vh;display:flex;align-items:center;justify-content:center;}
 
 /*
-  The oval image is portrait (aspect ~0.656w : 1h).
-  Rendered height  = min(100vh, 100vw/0.656)
-  Rendered width   = min(100vw, 100vh*0.656)
-  Safe content zone inside oval ≈ 54% of rendered width, centred.
-  We derive a single "unit" = the rendered width of the frame,
-  then size everything off that.
+  Frame aspect ratio: ~0.656 (width/height).
+  Rendered width  = min(100vw, 100vh * 0.656)
+  Safe oval zone  ≈ 54% of rendered width
 
-  On desktop (landscape): frame fills by height → rendered width = 100vh*0.656
-  On mobile  (portrait) : frame fills by width  → rendered width = 100vw
-
-  So content width = min(54vw, 54vh*0.656) = min(54vw, 35.4vh)
+  Base unit U = min(54vw, 35.4vh)
+  Everything sized as a fraction of U.
 */
 .content-box{
   width: min(54vw, 35.4vh);
   display:flex;flex-direction:column;
   align-items:center;text-align:center;
-  gap:0;
-  /* slight upward nudge to visual centre of oval */
-  margin-top: min(-2vw, -1.3vh);
+  margin-top: min(-1.5vw, -1vh);
 }
 
-/* Ganesh: ~18% of frame width */
+/* Ganesh animates from small → bigger on load */
 .ganesh{
-  width: min(18vw, 11.8vh);
-  max-width:160px;
+  width: min(20vw, 13.1vh);
+  max-width:180px;
   display:block;
-  margin-bottom: min(1vw, 0.65vh);
-  filter:drop-shadow(0 4px 14px rgba(0,0,0,0.6));
+  margin-bottom: min(0.9vw, 0.59vh);
+  filter:drop-shadow(0 5px 18px rgba(0,0,0,0.65));
+  animation: ganeshGrow 1.6s cubic-bezier(0.22,1,0.36,1) forwards;
+  transform-origin: center bottom;
+}
+@keyframes ganeshGrow{
+  0%  {opacity:0; transform:scale(0.45);}
+  60% {opacity:1; transform:scale(1.06);}
+  80% {transform:scale(0.97);}
+  100%{opacity:1; transform:scale(1);}
 }
 
-/* All text sized off the same "frame width" unit */
+/* Dividers */
+.rule{width:88%;max-width:210px;display:flex;align-items:center;gap:4px;margin:min(0.55vw,0.36vh) 0;}
+.rl{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,168,75,0.6),transparent);}
+.rd{width:min(0.7vw,0.46vh);height:min(0.7vw,0.46vh);min-width:5px;min-height:5px;background:var(--gold-l);transform:rotate(45deg);flex-shrink:0;}
+.rp{width:min(0.35vw,0.23vh);height:min(0.35vw,0.23vh);min-width:2.5px;min-height:2.5px;border-radius:50%;background:var(--gold);flex-shrink:0;opacity:0.7;}
+
+/* Shloka */
 .shloka{
   font-family:'Noto Sans Devanagari',sans-serif;
-  font-size: min(1.55vw, 1.01vh);
+  font-size:min(1.75vw, 1.15vh);
   color:var(--gold-l);line-height:1.9;letter-spacing:0.03em;
   text-shadow:0 1px 7px rgba(0,0,0,0.7);
-  margin-bottom: min(0.4vw, 0.26vh);
+  margin-bottom:min(0.5vw,0.33vh);
 }
 
-.rule{width:90%;max-width:220px;display:flex;align-items:center;gap:4px;margin: min(0.5vw,0.33vh) 0;}
-.rl{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,168,75,0.6),transparent);}
-.rd{width:min(0.7vw,0.46vh);height:min(0.7vw,0.46vh);min-width:4px;min-height:4px;background:var(--gold-l);transform:rotate(45deg);flex-shrink:0;}
-.rp{width:min(0.35vw,0.23vh);height:min(0.35vw,0.23vh);min-width:2px;min-height:2px;border-radius:50%;background:var(--gold);flex-shrink:0;opacity:0.7;}
+/* Text scale tokens — bigger than before */
+/* prose / body copy */
+.fs-xs  {font-size:min(1.85vw, 1.21vh);}
+.fs-sm  {font-size:min(2.0vw,  1.31vh);}
+/* display / name */
+.fs-lg  {font-size:min(4.5vw,  2.95vh);}
+.fs-xl  {font-size:min(4.7vw,  3.08vh);}
 
-.t-sm  {font-size: min(1.5vw, 0.98vh); line-height:1.7;}
-.t-med {font-size: min(1.65vw, 1.08vh); line-height:1.75;}
-.t-lg  {font-size: min(3.8vw, 2.49vh);  line-height:1.1;}
-.t-xl  {font-size: min(3.9vw, 2.55vh);  line-height:1.05;}
+.t-prose  {font-style:italic;font-weight:600;line-height:1.72;color:var(--cream);text-shadow:0 1px 9px rgba(0,0,0,0.7);margin:min(0.35vw,0.23vh) 0;}
+.t-lead   {font-style:italic;font-weight:600;line-height:1.68;color:rgba(245,232,200,0.9);text-shadow:0 1px 9px rgba(0,0,0,0.7);margin:min(0.3vw,0.2vh) 0;}
+.t-gold   {font-family:'Cormorant Upright',serif;font-weight:500;color:var(--gold-l);letter-spacing:0.04em;text-shadow:0 2px 12px rgba(0,0,0,0.55);margin:min(0.35vw,0.23vh) 0;}
+.t-beloved{font-style:italic;font-weight:600;color:rgba(245,232,200,0.9);text-shadow:0 1px 8px rgba(0,0,0,0.65);margin:min(0.2vw,0.13vh) 0;}
+.t-parents{font-style:italic;font-weight:600;color:rgba(212,168,75,0.9);letter-spacing:0.03em;text-shadow:0 1px 7px rgba(0,0,0,0.55);margin:min(0.2vw,0.13vh) 0;}
+.t-body   {font-style:italic;font-weight:600;line-height:1.8;color:var(--cream);text-shadow:0 1px 9px rgba(0,0,0,0.7);padding:min(0.4vw,0.26vh) 0;}
 
-.t-prose  {font-style:italic;font-weight:600;color:var(--cream);text-shadow:0 1px 9px rgba(0,0,0,0.7);margin: min(0.3vw,0.2vh) 0;}
-.t-lead   {font-style:italic;font-weight:600;color:rgba(245,232,200,0.9);text-shadow:0 1px 9px rgba(0,0,0,0.7);margin: min(0.3vw,0.2vh) 0;}
-.t-gold   {font-family:'Cormorant Upright',serif;font-weight:500;color:var(--gold-l);letter-spacing:0.04em;text-shadow:0 2px 12px rgba(0,0,0,0.55);margin: min(0.3vw,0.2vh) 0;}
-.t-beloved{font-style:italic;font-weight:600;color:rgba(245,232,200,0.9);text-shadow:0 1px 8px rgba(0,0,0,0.65);margin: min(0.2vw,0.13vh) 0;}
-.t-parents{font-style:italic;font-weight:600;color:rgba(212,168,75,0.9);letter-spacing:0.03em;text-shadow:0 1px 7px rgba(0,0,0,0.55);margin: min(0.2vw,0.13vh) 0;}
-
-/* Page 2 */
-.t-body  {font-style:italic;font-weight:600;line-height:1.8;color:var(--cream);text-shadow:0 1px 9px rgba(0,0,0,0.7);padding: min(0.4vw,0.26vh) 0;}
-.t-label {font-family:'Cormorant Upright',serif;font-size:min(2.7vw,1.77vh);font-weight:600;color:var(--gold-l);letter-spacing:0.08em;line-height:1.1;text-shadow:0 0 14px rgba(240,204,112,0.35),0 2px 10px rgba(0,0,0,0.6);padding: min(0.7vw,0.46vh) 0 min(0.15vw,0.1vh);}
-.t-date  {font-style:italic;font-weight:700;color:var(--gold-l);line-height:1.6;letter-spacing:0.04em;text-shadow:0 0 18px rgba(240,204,112,0.45),0 2px 10px rgba(0,0,0,0.7);padding: min(0.15vw,0.1vh) 0;}
-.t-venue {font-size:min(1.9vw,1.24vh);font-style:italic;font-weight:700;color:var(--cream);line-height:1.35;text-shadow:0 1px 9px rgba(0,0,0,0.7);padding: min(0.15vw,0.1vh) 0;}
-.map-link{font-size:min(1.35vw,0.88vh);font-style:italic;font-weight:600;display:inline-block;color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(212,168,75,0.5);padding-bottom:1px;line-height:1.5;transition:color 0.3s,border-color 0.3s;}
+/* Page 2 event labels */
+.t-label{font-family:'Cormorant Upright',serif;font-size:min(3.0vw,1.97vh);font-weight:600;color:var(--gold-l);letter-spacing:0.08em;line-height:1.1;text-shadow:0 0 14px rgba(240,204,112,0.35),0 2px 10px rgba(0,0,0,0.6);padding:min(0.75vw,0.49vh) 0 min(0.15vw,0.1vh);}
+.t-date  {font-style:italic;font-weight:700;font-size:min(1.65vw,1.08vh);color:var(--gold-l);line-height:1.6;letter-spacing:0.04em;text-shadow:0 0 18px rgba(240,204,112,0.45),0 2px 10px rgba(0,0,0,0.7);padding:min(0.15vw,0.1vh) 0;}
+.t-venue {font-size:min(2.15vw,1.41vh);font-style:italic;font-weight:700;color:var(--cream);line-height:1.35;text-shadow:0 1px 9px rgba(0,0,0,0.7);padding:min(0.15vw,0.1vh) 0;}
+.map-link{font-size:min(1.5vw,0.98vh);font-style:italic;font-weight:600;display:inline-block;color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(212,168,75,0.5);padding-bottom:1px;line-height:1.5;transition:color 0.3s,border-color 0.3s;}
 .map-link:hover{color:var(--gold-l);border-bottom-color:var(--gold-l);}
 
-/* scroll hint */
+/* Scroll hint */
 .scroll-hint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;opacity:0.85;pointer-events:none;z-index:3;}
 .scroll-hint span{font-family:'Cormorant',serif;font-size:10px;letter-spacing:0.28em;color:var(--gold-l);text-transform:uppercase;font-weight:700;}
 .chevrons{display:flex;flex-direction:column;align-items:center;gap:1px;margin-top:2px;}
@@ -121,8 +126,8 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 
 .reveal{opacity:0;transform:translateY(10px);transition:opacity 0.9s ease,transform 0.9s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
-.d1{transition-delay:.08s}.d2{transition-delay:.17s}.d3{transition-delay:.26s}
-.d4{transition-delay:.35s}.d5{transition-delay:.44s}.d6{transition-delay:.53s}.d7{transition-delay:.62s}
+.d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}
+.d4{transition-delay:.46s}.d5{transition-delay:.58s}.d6{transition-delay:.70s}.d7{transition-delay:.82s}
 
 @media(max-height:500px) and (orientation:landscape){
   .oval-page{height:auto;min-height:100vh;}
@@ -140,26 +145,26 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 <section class="oval-page" id="page1">
   <div class="content-box">
 
-    <img class="ganesh reveal" src="ganesh for rishit.png" alt="Lord Ganesha"/>
+    <img class="ganesh" src="ganesh for rishit.png" alt="Lord Ganesha"/>
 
     <div class="shloka reveal d1">
       | वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः |<br>
       ॥ निर्विघ्नं कुरु मे देवः सर्वकार्येषु सर्वदा ॥
     </div>
 
-    <div class="rule reveal d2"><div class="rl"></div><div class="rp"></div><div class="rd"></div><div class="rp"></div><div class="rl"></div></div>
+    <div class="rule reveal d1"><div class="rl"></div><div class="rp"></div><div class="rd"></div><div class="rp"></div><div class="rl"></div></div>
 
-    <p class="t-med t-prose reveal d2">By the divine grace of the Almighty, and with heartfelt joy<br>and gratitude, and with the blessings of our esteemed elders,</p>
+    <p class="fs-sm t-prose reveal d2">By the divine grace of the Almighty, and with heartfelt joy<br>and gratitude, and with the blessings of our esteemed elders,</p>
 
-    <p class="t-sm t-lead reveal d3">we take immense pleasure in inviting you to grace<br>the sacred and auspicious occasion of the</p>
+    <p class="fs-xs t-lead reveal d2">we take immense pleasure in inviting you to grace<br>the sacred and auspicious occasion of the</p>
 
+    <div class="rule reveal d2" style="max-width:175px;margin:3px 0;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
+    <div class="fs-lg t-gold reveal d3">Bratabandha Ceremony</div>
     <div class="rule reveal d3" style="max-width:175px;margin:3px 0;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
-    <div class="t-lg t-gold reveal d3">Bratabandha Ceremony</div>
-    <div class="rule reveal d3" style="max-width:175px;margin:3px 0;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
 
-    <p class="t-sm t-beloved reveal d4">of our beloved son</p>
-    <div class="t-xl t-gold reveal d4">Rishit Dahal</div>
-    <p class="t-sm t-parents reveal d4">(Samir Prasad Dahal &amp; Archana Wasti Dahal)</p>
+    <p class="fs-xs t-beloved reveal d3">of our beloved son</p>
+    <div class="fs-xl t-gold reveal d4">Rishit Dahal</div>
+    <p class="fs-xs t-parents reveal d4">(Samir Prasad Dahal &amp; Archana Wasti Dahal)</p>
 
   </div>
   <div class="scroll-hint" aria-hidden="true"><span>scroll</span><div class="chevrons"><div class="chev"></div><div class="chev"></div><div class="chev"></div></div></div>
@@ -169,7 +174,7 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 <section class="oval-page" id="page2">
   <div class="content-box">
 
-    <p class="t-med t-body reveal d1">
+    <p class="fs-sm t-body reveal d1">
       We would be deeply honored by your<br>
       gracious presence, which will bring joy,<br>
       blessings, and sanctity to this<br>
@@ -178,19 +183,19 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 
     <div class="rule reveal d2"><div class="rl"></div><div class="rp"></div><div class="rd"></div><div class="rp"></div><div class="rl"></div></div>
 
-    <div class="t-label reveal d3">Bratabandha &amp; Bhikshya Daan</div>
-    <p class="t-sm t-date reveal d3">Saturday, 11th July 2026 &nbsp;·&nbsp; 10 : 00 AM</p>
-    <p class="t-venue reveal d4">Shree Pashupati and Buddha Mandir</p>
-    <a class="map-link reveal d4" href="https://maps.google.com/?q=2657+Eglinton+Ave+E,+Scarborough,+ON+M1K+2S2" target="_blank" rel="noopener">
+    <div class="t-label reveal d2">Bratabandha &amp; Bhikshya Daan</div>
+    <p class="t-date reveal d3">Saturday, 11th July 2026 &nbsp;·&nbsp; 10 : 00 AM</p>
+    <p class="t-venue reveal d3">Shree Pashupati and Buddha Mandir</p>
+    <a class="map-link reveal d3" href="https://maps.google.com/?q=2657+Eglinton+Ave+E,+Scarborough,+ON+M1K+2S2" target="_blank" rel="noopener">
       2657 Eglinton Ave E, Scarborough ON M1K 2S2
     </a>
 
-    <div class="rule reveal d5" style="max-width:155px;margin:min(0.8vw,0.52vh) 0;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
+    <div class="rule reveal d4" style="max-width:155px;margin:min(0.9vw,0.59vh) 0;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
 
-    <div class="t-label reveal d5">Bratabandha Reception</div>
-    <p class="t-sm t-date reveal d5">Sunday, 12th July 2026 &nbsp;·&nbsp; 5 : 30 PM onwards</p>
-    <p class="t-venue reveal d6">Namaste Pavillion Restaurant</p>
-    <a class="map-link reveal d6" href="https://maps.google.com/?q=4438+Sheppard+Ave+E+%23201,+Scarborough,+ON+M1S+1V2" target="_blank" rel="noopener">
+    <div class="t-label reveal d4">Bratabandha Reception</div>
+    <p class="t-date reveal d5">Sunday, 12th July 2026 &nbsp;·&nbsp; 5 : 30 PM onwards</p>
+    <p class="t-venue reveal d5">Namaste Pavillion Restaurant</p>
+    <a class="map-link reveal d5" href="https://maps.google.com/?q=4438+Sheppard+Ave+E+%23201,+Scarborough,+ON+M1S+1V2" target="_blank" rel="noopener">
       4438 Sheppard Ave E #201, Scarborough ON M1S 1V2
     </a>
 
@@ -280,7 +285,7 @@ function send(){
     if(ec==='cant'){
       document.getElementById('s-icon').textContent='🙏';
       document.getElementById('s-msg').textContent='We truly appreciate you letting us know. Though you will be missed, we are grateful for your warm wishes and continued blessings for Rishit on this auspicious occasion.';
-    } else {
+    }else{
       document.getElementById('s-icon').textContent='🪔';
       document.getElementById('s-msg').textContent="We are truly delighted that you will grace us with your presence at Rishit's Bratabandha ceremony. Your blessings will make this occasion all the more sacred.";
     }
