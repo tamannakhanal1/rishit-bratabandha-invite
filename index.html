@@ -36,25 +36,22 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 */
 
 .content-box{
-  /* exactly the safe zone width */
   width: min(50vw, 32.8vh);
-  /* max height = safe zone height; clip if content somehow overflows */
   max-height: min(74vh, 112.8vw);
   overflow: hidden;
   display:flex;flex-direction:column;
   align-items:center;text-align:center;
-  /* push up to sit in visual centre of oval (oval top is narrower) */
-  margin-top: min(-6vw, -3.9vh);
+  margin-top: min(-14vw, -9.2vh);
   gap: 0;
 }
 
-/* Ganesh: 17% of safe_w */
+/* Ganesh: 12% of safe_w — smaller */
 .ganesh{
-  width: min(17vw, 11.1vh);
-  max-width: 150px;
+  width: min(12vw, 7.9vh);
+  max-width: 100px;
   display:block;
   flex-shrink: 0;
-  margin-bottom: min(0.8vw, 0.52vh);
+  margin-bottom: min(0.5vw, 0.33vh);
   filter:drop-shadow(0 4px 14px rgba(0,0,0,0.65));
   animation: ganeshGrow 1.6s cubic-bezier(0.22,1,0.36,1) forwards;
   transform-origin: center bottom;
