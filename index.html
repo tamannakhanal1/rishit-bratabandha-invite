@@ -19,76 +19,134 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 .oval-page{position:relative;z-index:2;width:100%;height:100vh;display:flex;align-items:center;justify-content:center;}
 
 /*
-  Frame aspect ratio: ~0.656 (width/height).
-  Rendered width  = min(100vw, 100vh * 0.656)
-  Safe oval zone  ≈ 54% of rendered width
+  OVAL SAFE ZONE MATHS
+  Frame aspect ratio (w:h) = 0.656
+  Rendered frame width  = min(100vw, 100vh × 0.656)
+  Rendered frame height = min(100vh, 100vw / 0.656)
 
-  Base unit U = min(54vw, 35.4vh)
-  Everything sized as a fraction of U.
+  Safe content width  ≈ 50% of frame width
+  Safe content height ≈ 74% of frame height  (oval is taller proportionally)
+
+  So: safe_w = min(50vw, 50vh × 0.656)  = min(50vw, 32.8vh)
+      safe_h = min(74vh, 74vw / 0.656)  = min(74vh, 112.8vw)
+
+  We use safe_w as our ONE base unit for ALL sizing.
+  Every font = fraction of safe_w so nothing ever overflows horizontally.
+  Content is overflow:hidden so vertical overflow is clipped cleanly.
 */
+
 .content-box{
+  /* exactly the safe zone width */
   width: min(50vw, 32.8vh);
+  /* max height = safe zone height; clip if content somehow overflows */
+  max-height: min(74vh, 112.8vw);
+  overflow: hidden;
   display:flex;flex-direction:column;
   align-items:center;text-align:center;
-  margin-top: min(-10vw, -6.5vh);
+  /* push up to sit in visual centre of oval (oval top is narrower) */
+  margin-top: min(-6vw, -3.9vh);
+  gap: 0;
 }
 
-/* Ganesh animates from small → bigger on load */
+/* Ganesh: 17% of safe_w */
 .ganesh{
-  width: min(14vw, 9.2vh);
-  max-width:120px;
+  width: min(17vw, 11.1vh);
+  max-width: 150px;
   display:block;
-  margin-bottom: min(0.9vw, 0.59vh);
-  filter:drop-shadow(0 5px 18px rgba(0,0,0,0.65));
+  flex-shrink: 0;
+  margin-bottom: min(0.8vw, 0.52vh);
+  filter:drop-shadow(0 4px 14px rgba(0,0,0,0.65));
   animation: ganeshGrow 1.6s cubic-bezier(0.22,1,0.36,1) forwards;
   transform-origin: center bottom;
 }
 @keyframes ganeshGrow{
-  0%  {opacity:0; transform:scale(0.45);}
-  60% {opacity:1; transform:scale(1.06);}
-  80% {transform:scale(0.97);}
-  100%{opacity:1; transform:scale(1);}
+  0%  {opacity:0;transform:scale(0.4);}
+  65% {opacity:1;transform:scale(1.05);}
+  85% {transform:scale(0.97);}
+  100%{opacity:1;transform:scale(1);}
 }
 
-/* Dividers */
-.rule{width:88%;max-width:210px;display:flex;align-items:center;gap:4px;margin:min(0.55vw,0.36vh) 0;}
-.rl{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,168,75,0.6),transparent);}
-.rd{width:min(0.7vw,0.46vh);height:min(0.7vw,0.46vh);min-width:5px;min-height:5px;background:var(--gold-l);transform:rotate(45deg);flex-shrink:0;}
-.rp{width:min(0.35vw,0.23vh);height:min(0.35vw,0.23vh);min-width:2.5px;min-height:2.5px;border-radius:50%;background:var(--gold);flex-shrink:0;opacity:0.7;}
+/* ── ALL FONT SIZES as % of safe_w ──
+   safe_w on a 390px phone = min(195px, 32.8vh)
+   At 844px tall phone: 32.8vh = 277px → safe_w = 195px
+   At 1080px tall tablet: 32.8vh = 354px → safe_w = min(50vw, 354) depends on vw
 
-/* Shloka */
+   Using 1cqw (container query width) would be ideal but for broad compat
+   we use: font-size = min(Xvw, X × 0.656vh) which = X% of safe_w on all devices.
+*/
 .shloka{
   font-family:'Noto Sans Devanagari',sans-serif;
-  font-size:min(2.0vw, 1.31vh);
-  color:var(--gold-l);line-height:1.9;letter-spacing:0.03em;
+  font-size: min(2.1vw, 1.38vh);
+  color:var(--gold-l);line-height:1.85;letter-spacing:0.02em;
   text-shadow:0 1px 7px rgba(0,0,0,0.7);
-  margin-bottom:min(0.5vw,0.33vh);
+  flex-shrink:0;
+  margin-bottom: min(0.6vw, 0.39vh);
 }
 
-/* Text scale tokens — bigger than before */
-/* prose / body copy */
-.fs-xs  {font-size:min(2.6vw, 1.70vh);}
-.fs-sm  {font-size:min(2.9vw, 1.90vh);}
-/* display / name */
-.fs-lg  {font-size:min(5.0vw, 3.28vh);}
-.fs-xl  {font-size:min(5.2vw, 3.41vh);}
+.rule{width:86%;max-width:200px;display:flex;align-items:center;gap:4px;margin: min(0.55vw,0.36vh) 0;flex-shrink:0;}
+.rl{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,168,75,0.6),transparent);}
+.rd{width:5px;height:5px;min-width:4px;min-height:4px;background:var(--gold-l);transform:rotate(45deg);flex-shrink:0;}
+.rp{width:2.5px;height:2.5px;border-radius:50%;background:var(--gold);flex-shrink:0;opacity:0.7;}
 
-.t-prose  {font-style:italic;font-weight:600;line-height:1.72;color:var(--cream);text-shadow:0 1px 9px rgba(0,0,0,0.7);margin:min(0.35vw,0.23vh) 0;}
-.t-lead   {font-style:italic;font-weight:600;line-height:1.68;color:rgba(245,232,200,0.9);text-shadow:0 1px 9px rgba(0,0,0,0.7);margin:min(0.3vw,0.2vh) 0;}
-.t-gold   {font-family:'Cormorant Upright',serif;font-weight:500;color:var(--gold-l);letter-spacing:0.04em;text-shadow:0 2px 12px rgba(0,0,0,0.55);margin:min(0.35vw,0.23vh) 0;}
-.t-beloved{font-style:italic;font-weight:600;color:rgba(245,232,200,0.9);text-shadow:0 1px 8px rgba(0,0,0,0.65);margin:min(0.2vw,0.13vh) 0;}
-.t-parents{font-style:italic;font-weight:600;color:rgba(212,168,75,0.9);letter-spacing:0.03em;text-shadow:0 1px 7px rgba(0,0,0,0.55);margin:min(0.2vw,0.13vh) 0;}
-.t-body   {font-style:italic;font-weight:600;line-height:1.8;color:var(--cream);text-shadow:0 1px 9px rgba(0,0,0,0.7);padding:min(0.4vw,0.26vh) 0;}
+/* Text tokens — all derived from safe_w */
+/* small: ~4.6% of safe_w */
+.fs-xs { font-size: min(2.3vw, 1.51vh); }
+/* medium: ~5.2% of safe_w */
+.fs-sm { font-size: min(2.6vw, 1.70vh); }
+/* heading display */
+.fs-lg { font-size: min(4.8vw, 3.15vh); }
+.fs-xl { font-size: min(5.0vw, 3.28vh); }
 
-/* Page 2 event labels */
-.t-label{font-family:'Cormorant Upright',serif;font-size:min(3.4vw,2.23vh);font-weight:600;color:var(--gold-l);letter-spacing:0.08em;line-height:1.1;text-shadow:0 0 14px rgba(240,204,112,0.35),0 2px 10px rgba(0,0,0,0.6);padding:min(0.75vw,0.49vh) 0 min(0.15vw,0.1vh);}
-.t-date  {font-style:italic;font-weight:700;font-size:min(2.9vw,1.90vh);color:var(--gold-l);line-height:1.6;letter-spacing:0.04em;text-shadow:0 0 18px rgba(240,204,112,0.45),0 2px 10px rgba(0,0,0,0.7);padding:min(0.15vw,0.1vh) 0;}
-.t-venue {font-size:min(3.3vw,2.16vh);font-style:italic;font-weight:700;color:var(--cream);line-height:1.35;text-shadow:0 1px 9px rgba(0,0,0,0.7);padding:min(0.15vw,0.1vh) 0;}
-.map-link{font-size:min(2.5vw,1.64vh);font-style:italic;font-weight:600;display:inline-block;color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(212,168,75,0.5);padding-bottom:1px;line-height:1.5;transition:color 0.3s,border-color 0.3s;}
+.t-italic  { font-style:italic; font-weight:600; }
+.t-cream   { color:var(--cream); text-shadow:0 1px 9px rgba(0,0,0,0.7); }
+.t-muted   { color:rgba(245,232,200,0.9); text-shadow:0 1px 9px rgba(0,0,0,0.7); }
+.t-gold    { font-family:'Cormorant Upright',serif; font-weight:500; color:var(--gold-l); letter-spacing:0.04em; text-shadow:0 2px 12px rgba(0,0,0,0.55); }
+.t-parents { font-style:italic; font-weight:600; color:rgba(212,168,75,0.9); letter-spacing:0.03em; text-shadow:0 1px 7px rgba(0,0,0,0.55); }
+
+.lh-body { line-height:1.72; }
+.lh-tight{ line-height:1.1;  }
+
+.my-xs { margin: min(0.3vw, 0.2vh) 0; }
+.my-sm { margin: min(0.45vw, 0.29vh) 0; }
+
+/* Page 2 specific */
+.t-label{
+  font-family:'Cormorant Upright',serif;
+  font-size: min(3.2vw, 2.10vh);
+  font-weight:600; color:var(--gold-l); letter-spacing:0.08em; line-height:1.1;
+  text-shadow:0 0 14px rgba(240,204,112,0.35),0 2px 10px rgba(0,0,0,0.6);
+  padding: min(0.7vw,0.46vh) 0 min(0.1vw,0.07vh);
+  flex-shrink:0;
+}
+.t-date{
+  font-style:italic; font-weight:700;
+  font-size: min(2.5vw, 1.64vh);
+  color:var(--gold-l); line-height:1.55; letter-spacing:0.03em;
+  text-shadow:0 0 18px rgba(240,204,112,0.45),0 2px 10px rgba(0,0,0,0.7);
+  padding: min(0.1vw,0.07vh) 0;
+  flex-shrink:0;
+}
+.t-venue{
+  font-size: min(2.9vw, 1.90vh);
+  font-style:italic; font-weight:700; color:var(--cream);
+  line-height:1.3; text-shadow:0 1px 9px rgba(0,0,0,0.7);
+  padding: min(0.1vw,0.07vh) 0;
+  flex-shrink:0;
+}
+.map-link{
+  font-size: min(2.2vw, 1.44vh);
+  font-style:italic; font-weight:600;
+  display:inline-block; color:var(--cream);
+  text-decoration:none;
+  border-bottom:1px solid rgba(212,168,75,0.5);
+  padding-bottom:1px; line-height:1.45;
+  transition:color 0.3s,border-color 0.3s;
+  flex-shrink:0;
+}
 .map-link:hover{color:var(--gold-l);border-bottom-color:var(--gold-l);}
 
 /* Scroll hint */
-.scroll-hint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;opacity:0.85;pointer-events:none;z-index:3;}
+.scroll-hint{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;opacity:0.85;pointer-events:none;z-index:3;}
 .scroll-hint span{font-family:'Cormorant',serif;font-size:10px;letter-spacing:0.28em;color:var(--gold-l);text-transform:uppercase;font-weight:700;}
 .chevrons{display:flex;flex-direction:column;align-items:center;gap:1px;margin-top:2px;}
 .chev{width:10px;height:10px;border-right:1.5px solid var(--gold-l);border-bottom:1.5px solid var(--gold-l);transform:rotate(45deg);animation:fall 1.4s ease-in-out infinite;}
@@ -126,7 +184,7 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 
 .reveal{opacity:0;transform:translateY(10px);transition:opacity 0.9s ease,transform 0.9s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
-.d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}
+.d1{transition-delay:.10s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}
 .d4{transition-delay:.46s}.d5{transition-delay:.58s}.d6{transition-delay:.70s}.d7{transition-delay:.82s}
 
 @media(max-height:500px) and (orientation:landscape){
@@ -154,17 +212,17 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 
     <div class="rule reveal d1"><div class="rl"></div><div class="rp"></div><div class="rd"></div><div class="rp"></div><div class="rl"></div></div>
 
-    <p class="fs-sm t-prose reveal d2">By the divine grace of the Almighty, and with heartfelt joy<br>and gratitude, and with the blessings of our esteemed elders,</p>
+    <p class="fs-sm t-italic t-cream lh-body my-xs reveal d2">By the divine grace of the Almighty, and with heartfelt joy<br>and gratitude, and with the blessings of our esteemed elders,</p>
 
-    <p class="fs-sm t-lead reveal d2">we take immense pleasure in inviting you to grace<br>the sacred and auspicious occasion of the</p>
+    <p class="fs-sm t-italic t-muted lh-body my-xs reveal d2">we take immense pleasure in inviting you to grace<br>the sacred and auspicious occasion of the</p>
 
-    <div class="rule reveal d2" style="max-width:175px;margin:3px 0;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
-    <div class="fs-lg t-gold reveal d3">Bratabandha Ceremony</div>
+    <div class="rule reveal d3" style="max-width:175px;margin:3px 0;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
+    <div class="fs-lg t-gold lh-tight my-xs reveal d3">Bratabandha Ceremony</div>
     <div class="rule reveal d3" style="max-width:175px;margin:3px 0;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
 
-    <p class="fs-xs t-beloved reveal d3">of our beloved son</p>
-    <div class="fs-xl t-gold reveal d4">Rishit Dahal</div>
-    <p class="fs-xs t-parents reveal d4">(Samir Prasad Dahal &amp; Archana Wasti Dahal)</p>
+    <p class="fs-xs t-italic t-muted my-xs reveal d4">of our beloved son</p>
+    <div class="fs-xl t-gold lh-tight my-xs reveal d4">Rishit Dahal</div>
+    <p class="fs-xs t-parents my-xs reveal d4">(Samir Prasad Dahal &amp; Archana Wasti Dahal)</p>
 
   </div>
   <div class="scroll-hint" aria-hidden="true"><span>scroll</span><div class="chevrons"><div class="chev"></div><div class="chev"></div><div class="chev"></div></div></div>
@@ -174,7 +232,7 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 <section class="oval-page" id="page2">
   <div class="content-box">
 
-    <p class="fs-sm t-body reveal d1">
+    <p class="fs-sm t-italic t-cream lh-body my-xs reveal d1">
       We would be deeply honored by your<br>
       gracious presence, which will bring joy,<br>
       blessings, and sanctity to this<br>
@@ -210,35 +268,17 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
       <div class="rsvp-heading">R · S · V · P</div>
       <div class="rule" style="max-width:210px;margin:10px auto 16px;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
       <p class="rsvp-sub">Please honour us with your gracious response.<br>Kindly select which events you will attend.</p>
-
       <label class="field-label" for="rsvp-name">Your Full Name</label>
       <input class="rsvp-input" type="text" id="rsvp-name" placeholder="Enter your name…" autocomplete="name" inputmode="text"/>
-
       <label class="field-label" for="rsvp-guests" id="guests-label">Number of Guests (including yourself)</label>
       <input class="rsvp-input" type="number" id="rsvp-guests" placeholder="1" min="1" max="20" inputmode="numeric" pattern="[0-9]*"/>
-
       <label class="field-label">Attendance</label>
-
-      <button class="choice-btn selected" id="btn-both" onclick="sel('both')" type="button">
-        🪔🎉 &nbsp;Both Events
-        <span class="choice-sub">Bratabandha (Sat Jul 11) &amp; Reception (Sun Jul 12)</span>
-      </button>
-      <button class="choice-btn" id="btn-evt1" onclick="sel('evt1')" type="button">
-        🪔 &nbsp;Bratabandha &amp; Bhikshya Daan only
-        <span class="choice-sub">Sat Jul 11 · 10 AM · Shree Pashupati and Buddha Mandir</span>
-      </button>
-      <button class="choice-btn" id="btn-evt2" onclick="sel('evt2')" type="button">
-        🎉 &nbsp;Bratabandha Reception only
-        <span class="choice-sub">Sun Jul 12 · 5:30 PM · Namaste Pavillion Restaurant</span>
-      </button>
-      <button class="choice-btn cant" id="btn-cant" onclick="sel('cant')" type="button">
-        🙏 &nbsp;Unable to Attend
-        <span class="choice-sub">We will miss you — thank you for letting us know</span>
-      </button>
-
+      <button class="choice-btn selected" id="btn-both" onclick="sel('both')" type="button">🪔🎉 &nbsp;Both Events<span class="choice-sub">Bratabandha (Sat Jul 11) &amp; Reception (Sun Jul 12)</span></button>
+      <button class="choice-btn" id="btn-evt1" onclick="sel('evt1')" type="button">🪔 &nbsp;Bratabandha &amp; Bhikshya Daan only<span class="choice-sub">Sat Jul 11 · 10 AM · Shree Pashupati and Buddha Mandir</span></button>
+      <button class="choice-btn" id="btn-evt2" onclick="sel('evt2')" type="button">🎉 &nbsp;Bratabandha Reception only<span class="choice-sub">Sun Jul 12 · 5:30 PM · Namaste Pavillion Restaurant</span></button>
+      <button class="choice-btn cant" id="btn-cant" onclick="sel('cant')" type="button">🙏 &nbsp;Unable to Attend<span class="choice-sub">We will miss you — thank you for letting us know</span></button>
       <button class="submit-btn" id="sub-btn" onclick="send()" type="button">Send My Response</button>
     </div>
-
     <div class="rsvp-success" id="rsvp-success" role="status" aria-live="polite">
       <div class="s-icon" id="s-icon">🪔</div>
       <div class="rule" style="max-width:160px;margin:0 auto;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
@@ -256,7 +296,6 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
   var ro=new IntersectionObserver(function(es){es.forEach(function(e){document.getElementById('bgFrame').classList.toggle('hidden',e.isIntersecting);});},{threshold:0.25});
   ro.observe(document.getElementById('rsvpSection'));
 })();
-
 var ec='both';
 function sel(c){
   ec=c;
@@ -265,30 +304,19 @@ function sel(c){
   var g=document.getElementById('rsvp-guests'),gl=document.getElementById('guests-label');
   g.style.opacity=isCant?'0.35':'1';g.style.pointerEvents=isCant?'none':'auto';gl.style.opacity=isCant?'0.35':'1';
 }
-
 function send(){
   var name=document.getElementById('rsvp-name').value.trim();
   var guests=document.getElementById('rsvp-guests').value||'1';
   if(!name){document.getElementById('rsvp-name').focus();alert('Please enter your name.');return;}
-  var map={
-    both:'Both Events — Bratabandha & Bhikshya Daan (Sat Jul 11, 10 AM) + Reception (Sun Jul 12, 5:30 PM)',
-    evt1:'Bratabandha & Bhikshya Daan only (Sat Jul 11, 10 AM)',
-    evt2:'Bratabandha Reception only (Sun Jul 12, 5:30 PM at Namaste Pavillion)',
-    cant:'Unable to Attend'
-  };
+  var map={both:'Both Events — Bratabandha & Bhikshya Daan (Sat Jul 11, 10 AM) + Reception (Sun Jul 12, 5:30 PM)',evt1:'Bratabandha & Bhikshya Daan only (Sat Jul 11, 10 AM)',evt2:'Bratabandha Reception only (Sun Jul 12, 5:30 PM at Namaste Pavillion)',cant:'Unable to Attend'};
   var btn=document.getElementById('sub-btn');
   btn.textContent='Sending…';btn.disabled=true;
   fetch('https://formspree.io/f/mbdzbwvl',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,guests:ec==='cant'?'0':guests,events:map[ec],_subject:'Bratabandha RSVP — '+name})})
   .then(function(){
     var form=document.getElementById('rsvp-form'),succ=document.getElementById('rsvp-success');
     document.getElementById('s-name').textContent=name;
-    if(ec==='cant'){
-      document.getElementById('s-icon').textContent='🙏';
-      document.getElementById('s-msg').textContent='We truly appreciate you letting us know. Though you will be missed, we are grateful for your warm wishes and continued blessings for Rishit on this auspicious occasion.';
-    }else{
-      document.getElementById('s-icon').textContent='🪔';
-      document.getElementById('s-msg').textContent="We are truly delighted that you will grace us with your presence at Rishit's Bratabandha ceremony. Your blessings will make this occasion all the more sacred.";
-    }
+    if(ec==='cant'){document.getElementById('s-icon').textContent='🙏';document.getElementById('s-msg').textContent='We truly appreciate you letting us know. Though you will be missed, we are grateful for your warm wishes and continued blessings for Rishit on this auspicious occasion.';}
+    else{document.getElementById('s-icon').textContent='🪔';document.getElementById('s-msg').textContent="We are truly delighted that you will grace us with your presence at Rishit's Bratabandha ceremony. Your blessings will make this occasion all the more sacred.";}
     form.style.transition='opacity 0.5s';form.style.opacity='0';
     setTimeout(function(){form.style.display='none';succ.classList.add('show');},500);
   })
