@@ -64,14 +64,14 @@ body{width:100%;height:100%;min-height:100vh;min-height:-webkit-fill-available;m
 .t-parents{font-size:min(3vw,1.75vh);font-style:italic;font-weight:600;color:rgba(212,168,75,0.9);letter-spacing:0.02em;line-height:1.4;text-shadow:0 1px 7px rgba(0,0,0,0.55);flex-shrink:0;}
 
 /* Page 2 event blocks */
-.t-label{font-family:'Cormorant Upright',serif;font-size:min(5.5vw,3.2vh);font-weight:600;color:var(--gold-l);letter-spacing:0.06em;line-height:1.2;text-shadow:0 0 14px rgba(240,204,112,0.35),0 2px 10px rgba(0,0,0,0.6);flex-shrink:0;}
-.t-date{font-size:min(3.4vw,2vh);font-style:italic;font-weight:700;color:#fff;text-decoration:underline;text-underline-offset:3px;line-height:1.45;letter-spacing:0.02em;text-shadow:0 1px 10px rgba(0,0,0,0.7);flex-shrink:0;}
-.t-venue{font-size:min(3.6vw,2.1vh);font-style:italic;font-weight:700;color:var(--cream);line-height:1.3;text-shadow:0 1px 9px rgba(0,0,0,0.7);flex-shrink:0;}
-.map-link{display:inline-flex;align-items:center;gap:4px;font-size:min(2.8vw,1.65vh);font-style:italic;font-weight:600;color:var(--gold-l);text-decoration:none;background:rgba(212,168,75,0.10);border:1px solid rgba(212,168,75,0.40);border-radius:3px;padding:0.8vw 1.8vw;line-height:1.4;transition:background 0.3s,border-color 0.3s;text-align:center;flex-shrink:0;}
-.map-link svg{width:min(2.8vw,1.65vh);height:min(2.8vw,1.65vh);flex-shrink:0;opacity:0.85;}
+.t-label{font-family:'Cormorant Upright',serif;font-size:min(5vw,2.8vh);font-weight:600;color:var(--gold-l);letter-spacing:0.05em;line-height:1.15;text-shadow:0 0 14px rgba(240,204,112,0.35),0 2px 10px rgba(0,0,0,0.6);flex-shrink:0;}
+.t-date{font-size:min(3vw,1.75vh);font-style:italic;font-weight:700;color:#fff;text-decoration:underline;text-underline-offset:3px;line-height:1.35;letter-spacing:0.02em;text-shadow:0 1px 10px rgba(0,0,0,0.7);flex-shrink:0;}
+.t-venue{font-size:min(3.2vw,1.85vh);font-style:italic;font-weight:700;color:var(--cream);line-height:1.25;text-shadow:0 1px 9px rgba(0,0,0,0.7);flex-shrink:0;}
+.map-link{display:inline-flex;align-items:center;gap:4px;font-size:min(2.5vw,1.45vh);font-style:italic;font-weight:600;color:var(--gold-l);text-decoration:none;background:rgba(212,168,75,0.10);border:1px solid rgba(212,168,75,0.40);border-radius:3px;padding:0.6vw 1.4vw;line-height:1.35;transition:background 0.3s,border-color 0.3s;text-align:center;flex-shrink:0;}
+.map-link svg{width:min(2.5vw,1.45vh);height:min(2.5vw,1.45vh);flex-shrink:0;opacity:0.85;}
 .map-link:hover,.map-link:active{background:rgba(212,168,75,0.2);border-color:var(--gold-l);}
 
-.event-block{display:flex;flex-direction:column;align-items:center;gap:0.6vh;flex-shrink:0;}
+.event-block{display:flex;flex-direction:column;align-items:center;gap:0.5vh;flex-shrink:0;}
 
 /* Scroll hint */
 .scroll-hint{position:absolute;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;opacity:0.85;pointer-events:none;z-index:3;}
@@ -150,29 +150,25 @@ body{width:100%;height:100%;min-height:100vh;min-height:-webkit-fill-available;m
   <div class="scroll-hint" aria-hidden="true"><span>scroll</span><div class="chevrons"><div class="chev"></div><div class="chev"></div><div class="chev"></div></div></div>
 </section>
 
-<!-- PAGE 2 — two events, tighter spacing -->
+<!-- PAGE 2 — two events tight inside oval -->
 <section class="oval-page" id="page2">
-  <div class="content-box" style="justify-content:center;gap:1.4vh;">
-
-    <p class="t-body reveal d1">We would be deeply honored by your<br>gracious presence, which will bring joy,<br>blessings, and sanctity to this<br>momentous celebration.</p>
-
-    <div class="rule reveal d2"><div class="rl"></div><div class="rp"></div><div class="rd"></div><div class="rp"></div><div class="rl"></div></div>
+  <div class="content-box" style="justify-content:center;gap:1vh;">
 
     <!-- Event 1 -->
-    <div class="event-block reveal d2">
+    <div class="event-block reveal d1">
       <div class="t-label">Bratabandha &amp; Bhikshya Daan</div>
       <p class="t-date">Saturday, 11th July 2026 · 10:00 AM</p>
-      <p class="t-venue">Shree Pashupati and Buddha Mandir</p>
+      <p class="t-venue">Shree Pashupati &amp; Buddha Mandir</p>
       <a class="map-link" href="https://maps.google.com/?q=2657+Eglinton+Ave+E,+Scarborough,+ON+M1K+2S2" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         2657 Eglinton Ave E, Scarborough ON
       </a>
     </div>
 
-    <div class="rule reveal d3" style="width:60%;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
+    <div class="rule reveal d2" style="width:60%;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
 
     <!-- Event 2 -->
-    <div class="event-block reveal d4">
+    <div class="event-block reveal d3">
       <div class="t-label">Bratabandha Reception</div>
       <p class="t-date">Sunday, 12th July 2026 · 5:30 PM onwards</p>
       <p class="t-venue">Namaste Pavillion Restaurant</p>
