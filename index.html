@@ -2,160 +2,95 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#2a0010">
 <title>Bratabandha Ceremony — Rishit Dahal</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 :root{--gold:#d4a84b;--gold-l:#f0cc70;--cream:#fdf6e8;--text:#f5e8c8;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow-x:hidden;}
 
-.bg-frame{position:fixed;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;background:#0e0005;transition:opacity 0.6s ease;}
+html{width:100%;height:100%;height:-webkit-fill-available;scroll-behavior:smooth;-webkit-text-size-adjust:100%;color-scheme:dark;background:#2a0010;}
+body{width:100%;height:100%;min-height:100vh;min-height:-webkit-fill-available;min-height:100dvh;font-family:'Cormorant',serif;background:#2a0010;color:var(--text);overflow-x:hidden;overscroll-behavior:none;-webkit-overflow-scrolling:touch;}
+
+/* WALLPAPER */
+.bg-frame{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:0;overflow:hidden;background:#2a0010;transition:opacity 0.6s ease;}
 .bg-frame.hidden{opacity:0;pointer-events:none;}
-.bg-frame img{max-width:100vw;max-height:100vh;width:auto;height:auto;object-fit:contain;display:block;}
+.bg-frame img{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-width:100%;min-height:100%;}
 
-.oval-page{position:relative;z-index:2;width:100%;height:100vh;display:flex;align-items:center;justify-content:center;}
+/* PAGES */
+.oval-page{position:relative;z-index:2;width:100%;height:100vh;height:100dvh;display:flex;align-items:center;justify-content:center;}
 
+/* Content box — sits inside the oval */
 .content-box{
-  width: min(50vw, 32.8vh);
-  max-height: min(74vh, 112.8vw);
-  overflow: hidden;
-  display:flex;flex-direction:column;
-  align-items:center;text-align:center;
-  margin-top: min(-14vw, -9.2vh);
-  gap: 0;
-}
-
-.ganesh{
-  width: min(12vw, 7.9vh);
-  max-width: 100px;
-  display:block;
-  flex-shrink: 0;
-  margin-bottom: min(0.5vw, 0.33vh);
-  filter:drop-shadow(0 4px 14px rgba(0,0,0,0.65));
-  animation: ganeshGrow 1.6s cubic-bezier(0.22,1,0.36,1) forwards;
-  transform-origin: center bottom;
-}
-@keyframes ganeshGrow{
-  0%  {opacity:0;transform:scale(0.4);}
-  65% {opacity:1;transform:scale(1.05);}
-  85% {transform:scale(0.97);}
-  100%{opacity:1;transform:scale(1);}
-}
-
-.shloka{
-  font-family:'Noto Sans Devanagari',sans-serif;
-  font-size: min(2.1vw, 1.38vh);
-  color:var(--gold-l);line-height:1.85;letter-spacing:0.02em;
-  text-shadow:0 1px 7px rgba(0,0,0,0.7);
-  flex-shrink:0;
-  margin-bottom: min(0.6vw, 0.39vh);
-}
-
-.rule{width:86%;max-width:200px;display:flex;align-items:center;gap:4px;margin: min(0.55vw,0.36vh) 0;flex-shrink:0;}
-.rl{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,168,75,0.6),transparent);}
-.rd{width:5px;height:5px;min-width:4px;min-height:4px;background:var(--gold-l);transform:rotate(45deg);flex-shrink:0;}
-.rp{width:2.5px;height:2.5px;border-radius:50%;background:var(--gold);flex-shrink:0;opacity:0.7;}
-
-.fs-xs { font-size: min(2.3vw, 1.51vh); }
-.fs-sm { font-size: min(2.6vw, 1.70vh); }
-.fs-lg { font-size: min(4.8vw, 3.15vh); }
-.fs-xl { font-size: min(5.0vw, 3.28vh); }
-
-.t-italic  { font-style:italic; font-weight:600; }
-.t-cream   { color:var(--cream); text-shadow:0 1px 9px rgba(0,0,0,0.7); }
-.t-muted   { color:rgba(245,232,200,0.9); text-shadow:0 1px 9px rgba(0,0,0,0.7); }
-.t-gold    { font-family:'Cormorant Upright',serif; font-weight:500; color:var(--gold-l); letter-spacing:0.04em; text-shadow:0 2px 12px rgba(0,0,0,0.55); }
-.t-parents { font-style:italic; font-weight:600; color:rgba(212,168,75,0.9); letter-spacing:0.03em; text-shadow:0 1px 7px rgba(0,0,0,0.55); }
-
-.lh-body { line-height:1.72; }
-.lh-tight{ line-height:1.1;  }
-
-.my-xs { margin: min(0.3vw, 0.2vh) 0; }
-.my-sm { margin: min(0.45vw, 0.29vh) 0; }
-
-/* ── Page 2 ── */
-.event-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: min(0.5vw, 0.33vh);
-  flex-shrink: 0;
-  padding: min(0.7vw, 0.46vh) 0;
-}
-
-.t-label{
-  font-family:'Cormorant Upright',serif;
-  font-size: min(3.2vw, 2.10vh);
-  font-weight:600; color:var(--gold-l); letter-spacing:0.08em; line-height:1.1;
-  text-shadow:0 0 14px rgba(240,204,112,0.35),0 2px 10px rgba(0,0,0,0.6);
-  flex-shrink:0;
-}
-.t-date{
-  font-style:italic; font-weight:700;
-  font-size: min(3.4vw, 2.23vh);
-  color:#ffffff; line-height:1.4; letter-spacing:0.03em;
-  text-decoration: underline; text-underline-offset: 3px;
-  text-shadow:0 1px 10px rgba(0,0,0,0.7);
-  flex-shrink:0;
-}
-.t-venue{
-  font-size: min(2.6vw, 1.70vh);
-  font-style:italic; font-weight:700; color:var(--cream);
-  line-height:1.25; text-shadow:0 1px 9px rgba(0,0,0,0.7);
-  flex-shrink:0;
-}
-
-/* Map link — clearly a tap target */
-.map-link{
-  display:inline-flex;
+  width:52vw;
+  height:68vh;
+  height:68dvh;
+  display:flex;
+  flex-direction:column;
   align-items:center;
-  gap: min(0.5vw, 0.33vh);
-  font-size: min(2.3vw, 1.51vh);
-  font-style:italic; font-weight:600;
-  color:var(--gold-l);
-  text-decoration:none;
-  background: rgba(212,168,75,0.10);
-  border: 1px solid rgba(212,168,75,0.40);
-  border-radius: 3px;
-  padding: min(0.45vw,0.3vh) min(1.1vw,0.72vh);
-  line-height:1.45;
-  transition:background 0.3s, border-color 0.3s, color 0.3s;
-  flex-shrink:0;
   text-align:center;
+  justify-content:space-evenly;
+  margin-top:-3vh;
+  padding:1vh 1vw;
+  overflow:hidden;
 }
-.map-link svg{
-  width: min(1.8vw, 1.18vh);
-  height: min(1.8vw, 1.18vh);
-  flex-shrink:0;
-  opacity:0.85;
-}
+
+/* Ganesha */
+.ganesh{width:min(12vw,7.9vh);max-width:80px;display:block;flex-shrink:0;filter:drop-shadow(0 4px 14px rgba(0,0,0,0.65));animation:ganeshGrow 1.6s cubic-bezier(0.22,1,0.36,1) forwards;transform-origin:center bottom;}
+@keyframes ganeshGrow{0%{opacity:0;transform:scale(0.4);}65%{opacity:1;transform:scale(1.05);}85%{transform:scale(0.97);}100%{opacity:1;transform:scale(1);}}
+
+.shloka{font-family:'Noto Sans Devanagari',sans-serif;font-size:min(3.2vw,1.9vh);color:var(--gold-l);line-height:1.7;letter-spacing:0.01em;text-shadow:0 1px 7px rgba(0,0,0,0.7);flex-shrink:0;}
+
+.rule{width:82%;display:flex;align-items:center;gap:4px;flex-shrink:0;}
+.rl{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,168,75,0.6),transparent);}
+.rd{width:5px;height:5px;background:var(--gold-l);transform:rotate(45deg);flex-shrink:0;}
+.rp{width:3px;height:3px;border-radius:50%;background:var(--gold);flex-shrink:0;opacity:0.7;}
+
+/* Body text */
+.t-body{font-size:min(3.8vw,2.2vh);font-style:italic;font-weight:600;line-height:1.55;color:var(--cream);text-shadow:0 1px 9px rgba(0,0,0,0.7);flex-shrink:0;}
+.t-muted{font-size:min(3.8vw,2.2vh);font-style:italic;font-weight:500;line-height:1.55;color:rgba(245,232,200,0.9);text-shadow:0 1px 9px rgba(0,0,0,0.7);flex-shrink:0;}
+
+/* Event / ceremony title */
+.t-title{font-family:'Cormorant Upright',serif;font-size:min(7.5vw,4.4vh);font-weight:500;color:var(--gold-l);letter-spacing:0.03em;line-height:1.15;text-shadow:0 2px 14px rgba(0,0,0,0.6);flex-shrink:0;}
+
+/* Name */
+.t-name{font-family:'Cormorant Upright',serif;font-size:min(8.5vw,5vh);font-weight:500;color:var(--gold-l);letter-spacing:0.03em;line-height:1.1;text-shadow:0 2px 14px rgba(0,0,0,0.6);flex-shrink:0;}
+
+/* Parents */
+.t-parents{font-size:min(3vw,1.75vh);font-style:italic;font-weight:600;color:rgba(212,168,75,0.9);letter-spacing:0.02em;line-height:1.4;text-shadow:0 1px 7px rgba(0,0,0,0.55);flex-shrink:0;}
+
+/* Page 2 event blocks */
+.t-label{font-family:'Cormorant Upright',serif;font-size:min(5.5vw,3.2vh);font-weight:600;color:var(--gold-l);letter-spacing:0.06em;line-height:1.2;text-shadow:0 0 14px rgba(240,204,112,0.35),0 2px 10px rgba(0,0,0,0.6);flex-shrink:0;}
+.t-date{font-size:min(3.4vw,2vh);font-style:italic;font-weight:700;color:#fff;text-decoration:underline;text-underline-offset:3px;line-height:1.45;letter-spacing:0.02em;text-shadow:0 1px 10px rgba(0,0,0,0.7);flex-shrink:0;}
+.t-venue{font-size:min(3.6vw,2.1vh);font-style:italic;font-weight:700;color:var(--cream);line-height:1.3;text-shadow:0 1px 9px rgba(0,0,0,0.7);flex-shrink:0;}
+.map-link{display:inline-flex;align-items:center;gap:4px;font-size:min(2.8vw,1.65vh);font-style:italic;font-weight:600;color:var(--gold-l);text-decoration:none;background:rgba(212,168,75,0.10);border:1px solid rgba(212,168,75,0.40);border-radius:3px;padding:0.8vw 1.8vw;line-height:1.4;transition:background 0.3s,border-color 0.3s;text-align:center;flex-shrink:0;}
+.map-link svg{width:min(2.8vw,1.65vh);height:min(2.8vw,1.65vh);flex-shrink:0;opacity:0.85;}
 .map-link:hover,.map-link:active{background:rgba(212,168,75,0.2);border-color:var(--gold-l);}
 
+.event-block{display:flex;flex-direction:column;align-items:center;gap:0.6vh;flex-shrink:0;}
+
 /* Scroll hint */
-.scroll-hint{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;opacity:0.85;pointer-events:none;z-index:3;}
+.scroll-hint{position:absolute;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;opacity:0.85;pointer-events:none;z-index:3;}
 .scroll-hint span{font-family:'Cormorant',serif;font-size:10px;letter-spacing:0.28em;color:var(--gold-l);text-transform:uppercase;font-weight:700;}
 .chevrons{display:flex;flex-direction:column;align-items:center;gap:1px;margin-top:2px;}
 .chev{width:10px;height:10px;border-right:1.5px solid var(--gold-l);border-bottom:1.5px solid var(--gold-l);transform:rotate(45deg);animation:fall 1.4s ease-in-out infinite;}
-.chev:nth-child(1){animation-delay:0s;opacity:0.5;}
-.chev:nth-child(2){animation-delay:0.2s;opacity:0.75;}
-.chev:nth-child(3){animation-delay:0.4s;opacity:1;}
+.chev:nth-child(1){animation-delay:0s;opacity:0.5;}.chev:nth-child(2){animation-delay:0.2s;opacity:0.75;}.chev:nth-child(3){animation-delay:0.4s;opacity:1;}
 @keyframes fall{0%{opacity:0;transform:rotate(45deg) translate(-3px,-3px);}50%{opacity:1;}100%{opacity:0;transform:rotate(45deg) translate(4px,4px);}}
 
-/* ══ RSVP ══ */
-.rsvp-section{position:relative;z-index:2;width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:60px 16px 80px;background:rgba(35,2,18,0.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(212,168,75,0.3);}
+/* RSVP */
+.rsvp-section{position:relative;z-index:2;width:100%;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:60px 16px calc(80px + env(safe-area-inset-bottom,0px));background:rgba(35,2,18,0.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(212,168,75,0.3);}
 .rsvp-card{width:min(540px,92vw);margin:0 auto;padding:clamp(26px,5vw,50px) clamp(18px,5vw,44px) clamp(26px,5vw,44px);background:rgba(55,3,28,0.55);border:1px solid rgba(212,168,75,0.28);box-shadow:0 8px 50px rgba(0,0,0,0.45),inset 0 1px 0 rgba(240,204,112,0.08);text-align:center;position:relative;}
 .rsvp-card::before,.rsvp-card::after{content:'';position:absolute;width:32px;height:32px;border-color:var(--gold);border-style:solid;opacity:0.45;}
-.rsvp-card::before{top:10px;left:10px;border-width:1px 0 0 1px;}
-.rsvp-card::after{bottom:10px;right:10px;border-width:0 1px 1px 0;}
+.rsvp-card::before{top:10px;left:10px;border-width:1px 0 0 1px;}.rsvp-card::after{bottom:10px;right:10px;border-width:0 1px 1px 0;}
 .rsvp-heading{font-family:'Times New Roman',serif;font-size:clamp(24px,7vw,44px);font-weight:700;font-style:italic;color:var(--gold-l);letter-spacing:0.12em;text-shadow:0 0 18px rgba(212,168,75,0.28);}
 .rsvp-sub{font-family:'Times New Roman',serif;font-size:clamp(13px,3.8vw,17px);font-style:italic;color:rgba(240,204,112,0.82);margin-bottom:28px;line-height:1.8;}
 .field-label{font-family:'Times New Roman',serif;font-size:clamp(10px,2.5vw,11px);letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:6px;text-align:left;}
 .rsvp-input{width:100%;padding:11px 4px;background:transparent;border:0;border-bottom:1px solid rgba(212,168,75,0.38);color:var(--cream);font-family:'Times New Roman',serif;font-size:clamp(15px,4.5vw,17px);font-style:italic;outline:none;transition:border-color 0.3s;margin-bottom:22px;border-radius:0;-webkit-appearance:none;}
-.rsvp-input::placeholder{color:rgba(245,232,200,0.25);}
-.rsvp-input:focus{border-bottom-color:var(--gold-l);}
+.rsvp-input::placeholder{color:rgba(245,232,200,0.25);}.rsvp-input:focus{border-bottom-color:var(--gold-l);}
 .rsvp-input[type=number]::-webkit-inner-spin-button,.rsvp-input[type=number]::-webkit-outer-spin-button{opacity:0.4;}
 .choice-btn{width:100%;padding:13px 14px;border:1px solid rgba(212,168,75,0.38);background:transparent;color:rgba(240,204,112,0.88);font-family:'Times New Roman',serif;font-size:clamp(13px,3.8vw,15.5px);font-style:italic;letter-spacing:0.03em;cursor:pointer;transition:all 0.3s;line-height:1.45;text-align:left;display:block;margin-bottom:9px;-webkit-appearance:none;touch-action:manipulation;min-height:44px;}
 .choice-btn:hover,.choice-btn:active,.choice-btn.selected{border-color:var(--gold-l);background:rgba(212,168,75,0.1);color:var(--gold-l);}
@@ -163,23 +98,17 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 .choice-btn.cant:hover,.choice-btn.cant:active,.choice-btn.cant.selected{border-color:rgba(212,168,75,0.7);background:rgba(212,168,75,0.07);color:rgba(240,204,100,0.9);}
 .choice-sub{display:block;font-size:0.78em;opacity:0.7;margin-top:3px;font-style:normal;}
 .submit-btn{width:100%;padding:14px;background:transparent;border:1px solid var(--gold-l);color:var(--gold-l);font-family:'Times New Roman',serif;font-size:clamp(13px,3.8vw,15.5px);font-style:italic;letter-spacing:0.18em;cursor:pointer;transition:all 0.35s;margin-top:6px;-webkit-appearance:none;touch-action:manipulation;min-height:48px;}
-.submit-btn:hover,.submit-btn:active{background:rgba(212,168,75,0.12);}
-.submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
-.rsvp-success{display:none;flex-direction:column;align-items:center;gap:14px;}
-.rsvp-success.show{display:flex;}
-.s-icon{font-size:42px;line-height:1;}
-.s-name{font-family:'Times New Roman',serif;font-size:clamp(18px,5vw,26px);font-style:italic;color:var(--gold-l);}
+.submit-btn:hover,.submit-btn:active{background:rgba(212,168,75,0.12);}.submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.rsvp-success{display:none;flex-direction:column;align-items:center;gap:14px;}.rsvp-success.show{display:flex;}
+.s-icon{font-size:42px;line-height:1;}.s-name{font-family:'Times New Roman',serif;font-size:clamp(18px,5vw,26px);font-style:italic;color:var(--gold-l);}
 .s-msg{font-family:'Times New Roman',serif;font-size:clamp(13px,3.8vw,17px);font-style:italic;color:rgba(240,204,112,0.85);line-height:1.8;max-width:400px;}
 
-.reveal{opacity:0;transform:translateY(10px);transition:opacity 0.9s ease,transform 0.9s ease;}
+.reveal{opacity:0;transform:translateY(8px);transition:opacity 0.9s ease,transform 0.9s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 .d1{transition-delay:.10s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}
-.d4{transition-delay:.46s}.d5{transition-delay:.58s}.d6{transition-delay:.70s}.d7{transition-delay:.82s}
+.d4{transition-delay:.46s}.d5{transition-delay:.58s}.d6{transition-delay:.70s}
 
-@media(max-height:500px) and (orientation:landscape){
-  .oval-page{height:auto;min-height:100vh;}
-  .scroll-hint{display:none;}
-}
+@media(max-height:500px) and (orientation:landscape){.oval-page{height:auto;min-height:100vh;}.scroll-hint{display:none;}}
 </style>
 </head>
 <body>
@@ -201,39 +130,38 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 
     <div class="rule reveal d1"><div class="rl"></div><div class="rp"></div><div class="rd"></div><div class="rp"></div><div class="rl"></div></div>
 
-    <p class="fs-sm t-italic t-cream lh-body my-xs reveal d2">By the divine grace of the Almighty, and with heartfelt joy<br>and gratitude, and with the blessings of our esteemed elders,</p>
+    <p class="t-body reveal d2">By the divine grace of the Almighty,<br>and with the blessings of our esteemed elders,</p>
 
-    <p class="fs-sm t-italic t-muted lh-body my-xs reveal d2">we take immense pleasure in inviting you to grace<br>the sacred and auspicious occasion of the</p>
+    <p class="t-muted reveal d3">we warmly invite you to join us<br>for the joyous occasion of the</p>
 
-    <div class="rule reveal d3" style="max-width:175px;margin:3px 0;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
-    <div class="fs-lg t-gold lh-tight my-xs reveal d3">Bratabandha Ceremony</div>
-    <div class="rule reveal d3" style="max-width:175px;margin:3px 0;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
+    <div class="rule reveal d3" style="width:72%;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
 
-    <p class="fs-xs t-italic t-muted my-xs reveal d4">of our beloved son</p>
-    <div class="fs-xl t-gold lh-tight my-xs reveal d4">Rishit Dahal</div>
-    <p class="fs-xs t-parents my-xs reveal d4">(Samir Prasad Dahal &amp; Archana Wasti Dahal)</p>
+    <div class="t-title reveal d4">Bratabandha Ceremony</div>
+
+    <div class="rule reveal d4" style="width:72%;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
+
+    <p class="t-muted reveal d5" style="font-size:min(3.4vw,2vh);">of our beloved son</p>
+
+    <div class="t-name reveal d5">Rishit Dahal</div>
+
+    <p class="t-parents reveal d6">(Samir Prasad Dahal &amp; Archana Wasti Dahal)</p>
 
   </div>
   <div class="scroll-hint" aria-hidden="true"><span>scroll</span><div class="chevrons"><div class="chev"></div><div class="chev"></div><div class="chev"></div></div></div>
 </section>
 
-<!-- PAGE 2 -->
+<!-- PAGE 2 — two events, tighter spacing -->
 <section class="oval-page" id="page2">
-  <div class="content-box">
+  <div class="content-box" style="justify-content:center;gap:1.4vh;">
 
-    <p class="fs-sm t-italic t-cream lh-body my-xs reveal d1">
-      We would be deeply honored by your<br>
-      gracious presence, which will bring joy,<br>
-      blessings, and sanctity to this<br>
-      momentous celebration.
-    </p>
+    <p class="t-body reveal d1">We would be deeply honored by your<br>gracious presence, which will bring joy,<br>blessings, and sanctity to this<br>momentous celebration.</p>
 
     <div class="rule reveal d2"><div class="rl"></div><div class="rp"></div><div class="rd"></div><div class="rp"></div><div class="rl"></div></div>
 
     <!-- Event 1 -->
     <div class="event-block reveal d2">
       <div class="t-label">Bratabandha &amp; Bhikshya Daan</div>
-      <p class="t-date">Saturday, 11th July 2026 &nbsp;·&nbsp; 10 : 00 AM</p>
+      <p class="t-date">Saturday, 11th July 2026 · 10:00 AM</p>
       <p class="t-venue">Shree Pashupati and Buddha Mandir</p>
       <a class="map-link" href="https://maps.google.com/?q=2657+Eglinton+Ave+E,+Scarborough,+ON+M1K+2S2" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -241,12 +169,12 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
       </a>
     </div>
 
-    <div class="rule reveal d3" style="max-width:155px;margin:min(0.9vw,0.59vh) 0;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
+    <div class="rule reveal d3" style="width:60%;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
 
     <!-- Event 2 -->
     <div class="event-block reveal d4">
       <div class="t-label">Bratabandha Reception</div>
-      <p class="t-date">Sunday, 12th July 2026 &nbsp;·&nbsp; 5 : 30 PM onwards</p>
+      <p class="t-date">Sunday, 12th July 2026 · 5:30 PM onwards</p>
       <p class="t-venue">Namaste Pavillion Restaurant</p>
       <a class="map-link" href="https://maps.google.com/?q=4438+Sheppard+Ave+E+%23201,+Scarborough,+ON+M1S+1V2" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -287,12 +215,18 @@ body{font-family:'Cormorant',serif;background:#0e0005;color:var(--text);overflow
 </section>
 
 <script>
+function setVH(){var vh=window.innerHeight*0.01;document.documentElement.style.setProperty('--vh',vh+'px');}
+setVH();
+window.addEventListener('resize',setVH);
+window.addEventListener('orientationchange',function(){setTimeout(setVH,300);});
+
 (function(){
   var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
   document.querySelectorAll('.reveal').forEach(function(el){o.observe(el);});
   var ro=new IntersectionObserver(function(es){es.forEach(function(e){document.getElementById('bgFrame').classList.toggle('hidden',e.isIntersecting);});},{threshold:0.25});
   ro.observe(document.getElementById('rsvpSection'));
 })();
+
 var ec='both';
 function sel(c){
   ec=c;
