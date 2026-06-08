@@ -16,71 +16,25 @@
 html,body{width:100%;height:100%;overflow:hidden;background:#2a0010;-webkit-text-size-adjust:100%;color-scheme:dark;}
 body{font-family:'Cormorant',serif;color:var(--text);}
 
-/* ── SNAP CONTAINER ── */
-.pages{
-  width:100%;height:100vh;height:100dvh;
-  overflow-y:scroll;
-  scroll-snap-type:y mandatory;
-  -webkit-overflow-scrolling:touch;
-  overscroll-behavior:none;
-}
+.pages{width:100%;height:100vh;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior:none;}
 
-/* ── EACH PAGE ── */
-.page{
-  width:100%;height:100vh;height:100dvh;
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
-  position:relative;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-}
+.page{width:100%;height:100vh;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 
-/* ── BACKGROUND (shared fixed-like via absolute on each page) ── */
-.page-bg{
-  position:absolute;inset:0;
-  background:#2a0010;
-  z-index:0;
-}
-.page-bg img{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:100%;height:100%;
-  object-fit:cover;object-position:center;
-  display:block;
-}
-.page-rsvp-bg{
-  position:absolute;inset:0;
-  background:rgba(35,2,18,0.95);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-top:1px solid rgba(212,168,75,0.3);
-  z-index:0;
-}
+.page-bg{position:absolute;inset:0;background:#2a0010;z-index:0;}
+.page-bg img{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+.page-rsvp-bg{position:absolute;inset:0;background:rgba(35,2,18,0.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(212,168,75,0.3);z-index:0;}
 
-/* ── CONTENT BOX ── */
-.content-box{
-  position:relative;z-index:2;
-  width:52vw;
-  height:68vh;height:68dvh;
-  display:flex;flex-direction:column;
-  align-items:center;text-align:center;
-  justify-content:space-evenly;
-  margin-top:-3vh;
-  padding:1vh 1vw;
-  overflow:hidden;
-}
+.content-box{position:relative;z-index:2;width:52vw;height:68vh;height:68dvh;display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:space-evenly;margin-top:-3vh;padding:1vh 1vw;overflow:hidden;}
 
-/* ── GANESH ── */
 .ganesh{width:min(12vw,7.9vh);max-width:80px;display:block;flex-shrink:0;filter:drop-shadow(0 4px 14px rgba(0,0,0,0.65));}
 .ganesh.animate{animation:ganeshGrow 1.6s cubic-bezier(0.22,1,0.36,1) forwards;}
 @keyframes ganeshGrow{0%{opacity:0;transform:scale(0.4);}65%{opacity:1;transform:scale(1.05);}85%{transform:scale(0.97);}100%{opacity:1;transform:scale(1);}}
 
-/* ── RULES ── */
 .rule{width:82%;display:flex;align-items:center;gap:4px;flex-shrink:0;}
 .rl{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,168,75,0.6),transparent);}
 .rd{width:5px;height:5px;background:var(--gold-l);transform:rotate(45deg);flex-shrink:0;}
 .rp{width:3px;height:3px;border-radius:50%;background:var(--gold);flex-shrink:0;opacity:0.7;}
 
-/* ── TYPOGRAPHY ── */
 .shloka{font-family:'Noto Sans Devanagari',sans-serif;font-size:min(3.2vw,1.9vh);color:var(--gold-l);line-height:1.7;letter-spacing:0.01em;text-shadow:0 1px 7px rgba(0,0,0,0.7);flex-shrink:0;}
 .t-body{font-size:min(3.8vw,2.2vh);font-style:italic;font-weight:600;line-height:1.55;color:var(--cream);text-shadow:0 1px 9px rgba(0,0,0,0.7);flex-shrink:0;}
 .t-muted{font-size:min(3.8vw,2.2vh);font-style:italic;font-weight:500;line-height:1.55;color:rgba(245,232,200,0.9);text-shadow:0 1px 9px rgba(0,0,0,0.7);flex-shrink:0;}
@@ -96,7 +50,6 @@ body{font-family:'Cormorant',serif;color:var(--text);}
 .map-link:hover,.map-link:active{background:rgba(212,168,75,0.2);border-color:var(--gold-l);}
 .event-block{display:flex;flex-direction:column;align-items:center;gap:0.7vh;flex-shrink:0;}
 
-/* ── SCROLL HINT ── */
 .scroll-hint{position:absolute;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;opacity:0.85;pointer-events:none;z-index:3;}
 .scroll-hint span{font-family:'Cormorant',serif;font-size:10px;letter-spacing:0.28em;color:var(--gold-l);text-transform:uppercase;font-weight:700;}
 .chevrons{display:flex;flex-direction:column;align-items:center;gap:1px;margin-top:2px;}
@@ -104,50 +57,46 @@ body{font-family:'Cormorant',serif;color:var(--text);}
 .chev:nth-child(1){animation-delay:0s;opacity:0.5;}.chev:nth-child(2){animation-delay:0.2s;opacity:0.75;}.chev:nth-child(3){animation-delay:0.4s;opacity:1;}
 @keyframes fall{0%{opacity:0;transform:rotate(45deg) translate(-3px,-3px);}50%{opacity:1;}100%{opacity:0;transform:rotate(45deg) translate(4px,4px);}}
 
-/* ── PAGE DOTS ── */
 .dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:10;}
 .dot{width:7px;height:7px;border-radius:50%;background:rgba(212,168,75,0.3);border:1px solid rgba(212,168,75,0.5);cursor:pointer;transition:background 0.3s,transform 0.3s;}
 .dot.active{background:var(--gold-l);transform:scale(1.35);}
 
-/* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(8px);transition:opacity 0.75s ease,transform 0.75s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 .d1{transition-delay:.08s}.d2{transition-delay:.20s}.d3{transition-delay:.32s}
 .d4{transition-delay:.44s}.d5{transition-delay:.56s}.d6{transition-delay:.68s}.d7{transition-delay:.80s}
 
-/* ── RSVP ── */
-.rsvp-wrap{position:relative;z-index:2;width:100%;display:flex;align-items:center;justify-content:center;padding:0 16px;}
-.rsvp-card{width:min(540px,92vw);padding:clamp(22px,4vw,46px) clamp(16px,5vw,42px);background:rgba(55,3,28,0.6);border:1px solid rgba(212,168,75,0.28);box-shadow:0 8px 50px rgba(0,0,0,0.45),inset 0 1px 0 rgba(240,204,112,0.08);text-align:center;position:relative;}
+/* RSVP */
+.rsvp-wrap{position:relative;z-index:2;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:0 16px;overflow-y:auto;}
+.rsvp-card{width:min(540px,92vw);margin:auto;padding:clamp(18px,3.5vw,40px) clamp(14px,4vw,38px);background:rgba(55,3,28,0.6);border:1px solid rgba(212,168,75,0.28);box-shadow:0 8px 50px rgba(0,0,0,0.45),inset 0 1px 0 rgba(240,204,112,0.08);text-align:center;position:relative;}
 .rsvp-card::before,.rsvp-card::after{content:'';position:absolute;width:32px;height:32px;border-color:var(--gold);border-style:solid;opacity:0.45;}
 .rsvp-card::before{top:10px;left:10px;border-width:1px 0 0 1px;}.rsvp-card::after{bottom:10px;right:10px;border-width:0 1px 1px 0;}
-.rsvp-heading{font-family:'Times New Roman',serif;font-size:clamp(24px,7vw,42px);font-weight:700;font-style:italic;color:var(--gold-l);letter-spacing:0.12em;text-shadow:0 0 18px rgba(212,168,75,0.28);}
-.rsvp-sub{font-family:'Times New Roman',serif;font-size:clamp(12px,3.5vw,16px);font-style:italic;color:rgba(240,204,112,0.82);margin-bottom:22px;line-height:1.75;}
-.field-label{font-family:'Times New Roman',serif;font-size:clamp(9px,2.2vw,11px);letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:5px;text-align:left;}
-.rsvp-input{width:100%;padding:10px 4px;background:transparent;border:0;border-bottom:1px solid rgba(212,168,75,0.38);color:var(--cream);font-family:'Times New Roman',serif;font-size:clamp(14px,4vw,17px);font-style:italic;outline:none;transition:border-color 0.3s;margin-bottom:18px;border-radius:0;-webkit-appearance:none;}
+.rsvp-heading{font-family:'Times New Roman',serif;font-size:clamp(22px,6vw,40px);font-weight:700;font-style:italic;color:var(--gold-l);letter-spacing:0.12em;text-shadow:0 0 18px rgba(212,168,75,0.28);}
+.rsvp-sub{font-family:'Times New Roman',serif;font-size:clamp(11px,3vw,15px);font-style:italic;color:rgba(240,204,112,0.82);margin-bottom:16px;line-height:1.7;}
+.field-label{font-family:'Times New Roman',serif;font-size:clamp(9px,2.2vw,11px);letter-spacing:0.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:4px;text-align:left;}
+.rsvp-input{width:100%;padding:9px 4px;background:transparent;border:0;border-bottom:1px solid rgba(212,168,75,0.38);color:var(--cream);font-family:'Times New Roman',serif;font-size:clamp(13px,3.8vw,16px);font-style:italic;outline:none;transition:border-color 0.3s;margin-bottom:14px;border-radius:0;-webkit-appearance:none;}
 .rsvp-input::placeholder{color:rgba(245,232,200,0.25);}.rsvp-input:focus{border-bottom-color:var(--gold-l);}
 .rsvp-input[type=number]::-webkit-inner-spin-button,.rsvp-input[type=number]::-webkit-outer-spin-button{opacity:0.4;}
-.choice-btn{width:100%;padding:11px 14px;border:1px solid rgba(212,168,75,0.38);background:transparent;color:rgba(240,204,112,0.88);font-family:'Times New Roman',serif;font-size:clamp(12px,3.5vw,15px);font-style:italic;letter-spacing:0.03em;cursor:pointer;transition:all 0.3s;line-height:1.4;text-align:left;display:block;margin-bottom:8px;-webkit-appearance:none;touch-action:manipulation;min-height:44px;}
+.choice-btn{width:100%;padding:9px 12px;border:1px solid rgba(212,168,75,0.38);background:transparent;color:rgba(240,204,112,0.88);font-family:'Times New Roman',serif;font-size:clamp(11px,3vw,14px);font-style:italic;letter-spacing:0.03em;cursor:pointer;transition:all 0.3s;line-height:1.35;text-align:left;display:block;margin-bottom:7px;-webkit-appearance:none;touch-action:manipulation;min-height:40px;}
 .choice-btn:hover,.choice-btn:active,.choice-btn.selected{border-color:var(--gold-l);background:rgba(212,168,75,0.1);color:var(--gold-l);}
 .choice-btn.cant{border-color:rgba(212,168,75,0.2);color:rgba(240,204,112,0.6);}
 .choice-btn.cant:hover,.choice-btn.cant:active,.choice-btn.cant.selected{border-color:rgba(212,168,75,0.7);background:rgba(212,168,75,0.07);color:rgba(240,204,100,0.9);}
-.choice-sub{display:block;font-size:0.78em;opacity:0.7;margin-top:2px;font-style:normal;}
-.submit-btn{width:100%;padding:13px;background:transparent;border:1px solid var(--gold-l);color:var(--gold-l);font-family:'Times New Roman',serif;font-size:clamp(12px,3.5vw,15px);font-style:italic;letter-spacing:0.18em;cursor:pointer;transition:all 0.35s;margin-top:4px;-webkit-appearance:none;touch-action:manipulation;min-height:46px;}
+.choice-sub{display:block;font-size:0.76em;opacity:0.68;margin-top:2px;font-style:normal;}
+.submit-btn{width:100%;padding:12px;background:transparent;border:1px solid var(--gold-l);color:var(--gold-l);font-family:'Times New Roman',serif;font-size:clamp(11px,3vw,14px);font-style:italic;letter-spacing:0.18em;cursor:pointer;transition:all 0.35s;margin-top:4px;-webkit-appearance:none;touch-action:manipulation;min-height:44px;}
 .submit-btn:hover,.submit-btn:active{background:rgba(212,168,75,0.12);}.submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
 .rsvp-success{display:none;flex-direction:column;align-items:center;gap:12px;}.rsvp-success.show{display:flex;}
-.s-icon{font-size:38px;line-height:1;}.s-name{font-family:'Times New Roman',serif;font-size:clamp(17px,5vw,24px);font-style:italic;color:var(--gold-l);}
-.s-msg{font-family:'Times New Roman',serif;font-size:clamp(12px,3.5vw,16px);font-style:italic;color:rgba(240,204,112,0.85);line-height:1.75;max-width:390px;}
+.s-icon{font-size:36px;line-height:1;}.s-name{font-family:'Times New Roman',serif;font-size:clamp(16px,4.5vw,22px);font-style:italic;color:var(--gold-l);}
+.s-msg{font-family:'Times New Roman',serif;font-size:clamp(11px,3vw,15px);font-style:italic;color:rgba(240,204,112,0.85);line-height:1.75;max-width:380px;}
 </style>
 </head>
 <body>
 
-<!-- PAGE DOTS -->
 <nav class="dots" aria-label="Page navigation">
   <div class="dot active" onclick="goTo(0)"></div>
   <div class="dot" onclick="goTo(1)"></div>
   <div class="dot" onclick="goTo(2)"></div>
 </nav>
 
-<!-- SNAP CONTAINER -->
 <div class="pages" id="pages">
 
   <!-- ══ PAGE 1 ══ -->
@@ -211,14 +160,16 @@ body{font-family:'Cormorant',serif;color:var(--text);}
       <div class="rsvp-card reveal">
         <div id="rsvp-form">
           <div class="rsvp-heading">R · S · V · P</div>
-          <div class="rule" style="max-width:200px;margin:8px auto 14px;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
-          <p class="rsvp-sub">Please honour us with your gracious response.<br>Kindly let us know if you will be joining us.</p>
+          <div class="rule" style="max-width:200px;margin:6px auto 12px;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
+          <p class="rsvp-sub">Please honour us with your gracious response.<br>Kindly select which events you will attend.</p>
           <label class="field-label" for="rsvp-name">Your Full Name</label>
           <input class="rsvp-input" type="text" id="rsvp-name" placeholder="Enter your name…" autocomplete="name" inputmode="text"/>
           <label class="field-label" for="rsvp-guests" id="guests-label">Number of Guests (including yourself)</label>
           <input class="rsvp-input" type="number" id="rsvp-guests" placeholder="1" min="1" max="20" inputmode="numeric" pattern="[0-9]*"/>
-          <label class="field-label">Will you attend?</label>
-          <button class="choice-btn selected" id="btn-attend" onclick="sel('attend')" type="button">🪔 &nbsp;I Will Attend<span class="choice-sub">We look forward to celebrating with you</span></button>
+          <label class="field-label">Which events will you attend?</label>
+          <button class="choice-btn selected" id="btn-both" onclick="sel('both')" type="button">🪔🎉 &nbsp;Both Events<span class="choice-sub">Bratabandha (Sat Jul 11) &amp; Reception (Sun Jul 12)</span></button>
+          <button class="choice-btn" id="btn-daan" onclick="sel('daan')" type="button">🪔 &nbsp;Bratabandha &amp; Bhikshya Daan only<span class="choice-sub">Sat Jul 11 · 10:00 AM · Shree Pashupatinath &amp; Buddha Mandir</span></button>
+          <button class="choice-btn" id="btn-reception" onclick="sel('reception')" type="button">🎉 &nbsp;Bratabandha Reception only<span class="choice-sub">Sun Jul 12 · 5:50 PM · Namaste Pavillion Restaurant</span></button>
           <button class="choice-btn cant" id="btn-cant" onclick="sel('cant')" type="button">🙏 &nbsp;Unable to Attend<span class="choice-sub">We will miss you — thank you for letting us know</span></button>
           <button class="submit-btn" id="sub-btn" onclick="send()" type="button">Send My Response</button>
         </div>
@@ -233,25 +184,20 @@ body{font-family:'Cormorant',serif;color:var(--text);}
     </div>
   </div>
 
-</div><!-- end .pages -->
+</div>
 
 <script>
 var pagesEl=document.getElementById('pages');
-var totalPages=3;
 var currentPage=0;
 
-/* ── DOT SYNC ── */
-function updateDots(idx){
-  document.querySelectorAll('.dot').forEach(function(d,i){d.classList.toggle('active',i===idx);});
+function updateDots(idx){document.querySelectorAll('.dot').forEach(function(d,i){d.classList.toggle('active',i===idx);});}
+function goTo(idx){pagesEl.scrollTo({top:idx*window.innerHeight,behavior:'smooth'});}
+function triggerReveals(pageIdx){
+  var page=document.getElementById('p'+pageIdx);
+  if(!page)return;
+  page.querySelectorAll('.reveal').forEach(function(el){el.classList.remove('visible');void el.offsetWidth;});
+  requestAnimationFrame(function(){page.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});});
 }
-
-/* ── GO TO PAGE ── */
-function goTo(idx){
-  var pageH=window.innerHeight;
-  pagesEl.scrollTo({top:idx*pageH,behavior:'smooth'});
-}
-
-/* ── SCROLL LISTENER → update dots + trigger reveals ── */
 var scrollTimer;
 pagesEl.addEventListener('scroll',function(){
   clearTimeout(scrollTimer);
@@ -259,44 +205,35 @@ pagesEl.addEventListener('scroll',function(){
     var idx=Math.round(pagesEl.scrollTop/window.innerHeight);
     if(idx!==currentPage){currentPage=idx;updateDots(idx);triggerReveals(idx);}
   },60);
-},{ passive:true });
+},{passive:true});
+window.addEventListener('load',function(){setTimeout(function(){triggerReveals(0);},100);});
 
-/* ── REVEAL on page enter ── */
-function triggerReveals(pageIdx){
-  var page=document.getElementById('p'+pageIdx);
-  if(!page)return;
-  page.querySelectorAll('.reveal').forEach(function(el){
-    el.classList.remove('visible');
-    void el.offsetWidth;
-  });
-  requestAnimationFrame(function(){
-    page.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});
-  });
-}
-
-/* ── Initial reveal for page 0 ── */
-window.addEventListener('load',function(){
-  setTimeout(function(){triggerReveals(0);},100);
-});
-
-/* ── RSVP ── */
-var ec='attend';
+var ec='both';
+var ALL_BTNS=['both','daan','reception','cant'];
 function sel(c){
   ec=c;
-  ['attend','cant'].forEach(function(id){document.getElementById('btn-'+id).classList.toggle('selected',id===c);});
+  ALL_BTNS.forEach(function(id){document.getElementById('btn-'+id).classList.toggle('selected',id===c);});
   var isCant=c==='cant';
   var g=document.getElementById('rsvp-guests'),gl=document.getElementById('guests-label');
   g.style.opacity=isCant?'0.35':'1';
   g.style.pointerEvents=isCant?'none':'auto';
   gl.style.opacity=isCant?'0.35':'1';
 }
+
+var eventsMap={
+  both:'Both Events — Bratabandha & Bhikshya Daan (Sat Jul 11, 10:00 AM) + Bratabandha Reception (Sun Jul 12, 5:50 PM)',
+  daan:'Bratabandha & Bhikshya Daan only (Sat Jul 11, 10:00 AM · Shree Pashupatinath & Buddha Mandir)',
+  reception:'Bratabandha Reception only (Sun Jul 12, 5:50 PM · Namaste Pavillion Restaurant)',
+  cant:'Unable to Attend'
+};
+
 function send(){
   var name=document.getElementById('rsvp-name').value.trim();
   var guests=document.getElementById('rsvp-guests').value||'1';
   if(!name){document.getElementById('rsvp-name').focus();alert('Please enter your name.');return;}
   var btn=document.getElementById('sub-btn');
   btn.textContent='Sending…';btn.disabled=true;
-  fetch('https://formspree.io/f/mpqedwgq',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,guests:ec==='cant'?'0':guests,attendance:ec==='attend'?'Will Attend':'Unable to Attend',_subject:'Bratabandha RSVP — '+name})})
+  fetch('https://formspree.io/f/mpqedwgq',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,guests:ec==='cant'?'0':guests,attendance:eventsMap[ec],_subject:'Bratabandha RSVP — '+name})})
   .then(function(){
     var form=document.getElementById('rsvp-form'),succ=document.getElementById('rsvp-success');
     document.getElementById('s-name').textContent=name;
