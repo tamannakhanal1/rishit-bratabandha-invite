@@ -260,7 +260,7 @@ function send(){
   if(!name){document.getElementById('rsvp-name').focus();alert('Please enter your name.');return;}
   var btn=document.getElementById('sub-btn');
   btn.textContent='Sending…';btn.disabled=true;
-  fetch('https://script.google.com/macros/s/AKfycbwXfkLyWIpq8HYdCMp4j484hXXs9d7RoDfsHIdkaEynuG9C-omiyeDoIKr0jjpvTwE/exec',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,guests:ec==='cant'?'0':guests,attendance:eventsMap[ec]})})
+  fetch('https://script.google.com/macros/s/AKfycbw4zFm7Cr09aUFXAdVpXizT-GVlZKEgcJfrztdIakB_-CMQTJWwCkuXho0ypXoZywhW/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,guests:ec==='cant'?'0':guests,attendance:eventsMap[ec]})})
   .then(function(){
     var form=document.getElementById('rsvp-form'),succ=document.getElementById('rsvp-success');
     document.getElementById('s-name').textContent=name;
