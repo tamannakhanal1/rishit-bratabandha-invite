@@ -21,34 +21,18 @@ body{font-family:'Cormorant',serif;color:var(--text);}
 .page-bg img{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
 .page-rsvp-bg{position:absolute;inset:0;background:rgba(35,2,18,0.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(212,168,75,0.3);z-index:0;}
 
-/* Content box — snug inside the oval */
-.content-box{
-  position:relative;z-index:2;
-  width:50vw;
-  height:66vh;height:66dvh;
-  display:flex;flex-direction:column;
-  align-items:center;text-align:center;
-  justify-content:center;
-  gap:0.6vh;
-  margin-top:-2vh;
-  padding:0 1.5vw;
-  overflow:hidden;
-}
+.content-box{position:relative;z-index:2;width:50vw;height:66vh;height:66dvh;display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center;gap:0.6vh;margin-top:-2vh;padding:0 1.5vw;overflow:hidden;}
 .ganesh-gap{margin-bottom:0.8vh;}
-
-/* Ganesh */
 .ganesh{width:min(11vw,6.8vh);max-width:68px;display:block;flex-shrink:0;filter:drop-shadow(0 3px 10px rgba(0,0,0,0.6));}
 .ganesh.animate{animation:ganeshGrow 1.6s cubic-bezier(0.22,1,0.36,1) forwards;}
 @keyframes ganeshGrow{0%{opacity:0;transform:scale(0.4);}65%{opacity:1;transform:scale(1.05);}85%{transform:scale(0.97);}100%{opacity:1;transform:scale(1);}}
 
-/* Rules */
 .rule{width:75%;display:flex;align-items:center;gap:4px;flex-shrink:0;}
 .rule-sm{width:55%;}
 .rl{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,168,75,0.55),transparent);}
 .rd{width:4px;height:4px;background:var(--gold-l);transform:rotate(45deg);flex-shrink:0;}
 .rp{width:2.5px;height:2.5px;border-radius:50%;background:var(--gold);flex-shrink:0;opacity:0.7;}
 
-/* Typography — all sized relative to viewport height for consistency */
 .shloka{font-family:'Noto Sans Devanagari',sans-serif;font-size:min(1.5vw,0.85vh);color:var(--gold-l);line-height:1.8;letter-spacing:0.01em;opacity:0.85;flex-shrink:0;}
 .t-sm{font-size:min(3.2vw,1.75vh);font-style:italic;font-weight:500;color:rgba(245,232,200,0.88);line-height:1.5;flex-shrink:0;}
 .t-title{font-family:'Cormorant Upright',serif;font-size:min(7.2vw,4.2vh);font-weight:500;color:var(--gold-l);letter-spacing:0.04em;line-height:1.1;text-shadow:0 2px 12px rgba(0,0,0,0.5);flex-shrink:0;}
@@ -56,7 +40,6 @@ body{font-family:'Cormorant',serif;color:var(--text);}
 .t-label-gold{font-size:min(2.7vw,1.55vh);font-style:italic;font-weight:600;color:rgba(212,168,75,0.9);letter-spacing:0.04em;line-height:1.4;flex-shrink:0;}
 .t-val{font-size:min(2.8vw,1.65vh);font-style:italic;font-weight:600;color:rgba(245,232,200,0.92);letter-spacing:0.02em;line-height:1.4;flex-shrink:0;}
 
-/* Page 2 event blocks */
 .t-event-title{font-family:'Cormorant Upright',serif;font-size:min(5.8vw,3.4vh);font-weight:600;color:var(--gold-l);letter-spacing:0.05em;line-height:1.1;text-shadow:0 0 12px rgba(240,204,112,0.3);flex-shrink:0;}
 .t-date{font-family:'Cormorant Upright',serif;font-size:min(3.9vw,2.3vh);font-weight:500;color:#fff;text-decoration:underline;text-underline-offset:3px;line-height:1.3;letter-spacing:0.02em;flex-shrink:0;}
 .t-venue{font-family:'Cormorant Upright',serif;font-size:min(3.5vw,2vh);font-weight:500;color:var(--cream);line-height:1.25;flex-shrink:0;}
@@ -65,27 +48,23 @@ body{font-family:'Cormorant',serif;color:var(--text);}
 .map-link:hover,.map-link:active{background:rgba(212,168,75,0.18);}
 .event-block{display:flex;flex-direction:column;align-items:center;gap:0.6vh;flex-shrink:0;}
 
-/* Scroll hint */
 .scroll-hint{position:absolute;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;opacity:0.7;pointer-events:none;z-index:3;}
 .scroll-hint span{font-family:'Cormorant',serif;font-size:9px;letter-spacing:0.28em;color:var(--gold-l);text-transform:uppercase;font-weight:700;}
 .chevrons{display:flex;flex-direction:column;align-items:center;gap:1px;margin-top:2px;}
 .chev{width:8px;height:8px;border-right:1.5px solid var(--gold-l);border-bottom:1.5px solid var(--gold-l);transform:rotate(45deg);animation:fall 1.4s ease-in-out infinite;}
 .chev:nth-child(1){animation-delay:0s;opacity:0.4;}.chev:nth-child(2){animation-delay:0.2s;opacity:0.7;}.chev:nth-child(3){animation-delay:0.4s;opacity:1;}
 @keyframes fall{0%{opacity:0;transform:rotate(45deg) translate(-3px,-3px);}50%{opacity:1;}100%{opacity:0;transform:rotate(45deg) translate(4px,4px);}}
-
-/* Dots */
 @keyframes pulse{0%,100%{opacity:0.5;}50%{opacity:1;}}
-position:fixed;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px;z-index:10;}
+
+.dots{position:fixed;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px;z-index:10;}
 .dot{width:6px;height:6px;border-radius:50%;background:rgba(212,168,75,0.25);border:1px solid rgba(212,168,75,0.45);cursor:pointer;transition:background 0.3s,transform 0.3s;}
 .dot.active{background:var(--gold-l);transform:scale(1.4);}
 
-/* Reveal */
 .reveal{opacity:0;transform:translateY(6px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 .d1{transition-delay:.06s}.d2{transition-delay:.16s}.d3{transition-delay:.26s}
 .d4{transition-delay:.36s}.d5{transition-delay:.46s}.d6{transition-delay:.56s}.d7{transition-delay:.66s}
 
-/* RSVP */
 .rsvp-wrap{position:relative;z-index:2;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:0 16px;overflow-y:auto;}
 .rsvp-card{width:min(500px,90vw);margin:auto;padding:clamp(18px,3vw,36px) clamp(14px,4vw,36px);background:rgba(55,3,28,0.6);border:1px solid rgba(212,168,75,0.28);box-shadow:0 8px 40px rgba(0,0,0,0.4),inset 0 1px 0 rgba(240,204,112,0.07);text-align:center;position:relative;}
 .rsvp-card::before,.rsvp-card::after{content:'';position:absolute;width:28px;height:28px;border-color:var(--gold);border-style:solid;opacity:0.4;}
@@ -110,20 +89,18 @@ position:fixed;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-d
 </head>
 <body>
 
-<!-- Music -->
 <audio id="bgMusic" loop src="mangal-dhun.mp3" preload="auto"></audio>
 
-<!-- Splash -->
 <div id="splash" style="position:fixed;inset:0;z-index:100;background:#0e0005;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer;transition:opacity 0.8s ease;padding:32px;" onclick="enterInvite()">
   <div style="font-family:'Cormorant',serif;font-size:clamp(13px,2.8vw,17px);font-style:italic;color:rgba(245,232,200,0.65);letter-spacing:0.06em;text-align:center;">
     You are warmly invited to
   </div>
   <div style="font-family:'Cormorant Upright',serif;font-size:clamp(28px,6.5vw,48px);font-weight:500;color:#f0cc70;letter-spacing:0.08em;text-align:center;text-shadow:0 0 28px rgba(212,168,75,0.3);line-height:1.15;">
-    Rishit Dahal's<br>Bratabandha
+    Rishit Dahal's<br>Bratabandha Ceremony
   </div>
   <div style="width:40px;height:1px;background:rgba(212,168,75,0.4);"></div>
   <div style="font-family:'Cormorant',serif;font-size:clamp(11px,2.2vw,14px);font-style:italic;color:rgba(245,232,200,0.45);letter-spacing:0.22em;animation:pulse 2s ease-in-out infinite;">
-    tap to open
+    tap anywhere to open
   </div>
 </div>
 
@@ -141,34 +118,24 @@ position:fixed;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-d
   <div class="page" id="p0">
     <div class="page-bg"><img src="frame for rishit.png" alt="Decorative frame"/></div>
     <div class="content-box">
-
       <img class="ganesh animate ganesh-gap" src="ganesh for rishit.png" alt="Lord Ganesha"/>
-
       <div class="shloka reveal d1">
         | वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः |<br>
         ॥ निर्विघ्नं कुरु मे देवः सर्वकार्येषु सर्वदा ॥
       </div>
-
       <div class="rule reveal d1"><div class="rl"></div><div class="rp"></div><div class="rd"></div><div class="rp"></div><div class="rl"></div></div>
-
       <p class="t-sm reveal d2">By the divine grace of the Almighty,<br>and with the blessings of our esteemed elders,<br>we warmly invite you to the joyous occasion of the</p>
-
       <div class="rule rule-sm reveal d3"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
       <div class="t-title reveal d3">Bratabandha Ceremony</div>
       <div class="rule rule-sm reveal d3"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
-
       <p class="t-sm reveal d4" style="font-size:min(2.6vw,1.45vh);">of</p>
       <div class="t-name reveal d4">Rishit Dahal</div>
-
       <p class="t-label-gold reveal d4">Son of</p>
-      <p class="t-val reveal d4">Archana &amp; Samir Prasad Dahal</p>
-
+      <p class="t-val reveal d4">Archana Wasti Dahal &amp; Samir Prasad Dahal</p>
       <div class="rule rule-sm reveal d5"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
-
       <p class="t-label-gold reveal d5">Grandson of</p>
-      <p class="t-val reveal d6">Saraswati &amp; Mohan Prasad Dahal</p>
-      <p class="t-val reveal d7">Ganga &amp; Vedraj Wasti</p>
-
+      <p class="t-val reveal d6">Saraswati Dahal &amp; Mohan Prasad Dahal</p>
+      <p class="t-val reveal d7">Ganga Wasti &amp; Vedraj Wasti</p>
     </div>
     <div class="scroll-hint" aria-hidden="true"><span>scroll</span><div class="chevrons"><div class="chev"></div><div class="chev"></div><div class="chev"></div></div></div>
   </div>
@@ -177,7 +144,6 @@ position:fixed;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-d
   <div class="page" id="p1">
     <div class="page-bg"><img src="frame for rishit.png" alt="Decorative frame"/></div>
     <div class="content-box" style="justify-content:center;gap:1.2vh;">
-
       <div class="event-block reveal d1">
         <div class="t-event-title">Bratabandha &amp; Bhikshya Daan</div>
         <p class="t-date">Saturday, 11th July 2026 · 10:00 AM</p>
@@ -187,9 +153,7 @@ position:fixed;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-d
           2657 Eglinton Ave E, Scarborough ON
         </a>
       </div>
-
       <div class="rule reveal d2" style="width:50%;"><div class="rl"></div><div class="rd"></div><div class="rl"></div></div>
-
       <div class="event-block reveal d3">
         <div class="t-event-title">Bratabandha Reception</div>
         <p class="t-date">Sunday, 12th July 2026 · 5:50 PM onwards</p>
@@ -199,7 +163,6 @@ position:fixed;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-d
           4438 Sheppard Ave E #201, Scarborough ON
         </a>
       </div>
-
     </div>
     <div class="scroll-hint" aria-hidden="true"><span>scroll</span><div class="chevrons"><div class="chev"></div><div class="chev"></div><div class="chev"></div></div></div>
   </div>
@@ -241,25 +204,19 @@ position:fixed;right:12px;top:50%;transform:translateY(-50%);display:flex;flex-d
 var music=document.getElementById('bgMusic');
 var musicBtn=document.getElementById('musicBtn');
 var playing=false;
-music.volume=0.05;
+music.volume=0.02;
 
 function enterInvite(){
   var splash=document.getElementById('splash');
   splash.style.opacity='0';
   setTimeout(function(){splash.style.display='none';},800);
-  music.play().then(function(){
-    playing=true;
-    musicBtn.style.opacity='1';
-  }).catch(function(){
-    musicBtn.style.opacity='0.55';
-  });
+  music.play().then(function(){playing=true;musicBtn.style.opacity='1';}).catch(function(){musicBtn.style.opacity='0.55';});
   setTimeout(function(){triggerReveals(0);},200);
   musicBtn.style.opacity='1';
 }
-
 function toggleMusic(){
-  if(playing){music.pause();musicBtn.textContent='♪';musicBtn.style.opacity='0.45';playing=false;}
-  else{music.play();musicBtn.textContent='♪';musicBtn.style.opacity='1';playing=true;}
+  if(playing){music.pause();musicBtn.style.opacity='0.45';playing=false;}
+  else{music.play();musicBtn.style.opacity='1';playing=true;}
 }
 
 var pagesEl=document.getElementById('pages');
@@ -303,7 +260,7 @@ function send(){
   if(!name){document.getElementById('rsvp-name').focus();alert('Please enter your name.');return;}
   var btn=document.getElementById('sub-btn');
   btn.textContent='Sending…';btn.disabled=true;
-  fetch('https://formspree.io/f/mpqedwgq',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,guests:ec==='cant'?'0':guests,attendance:eventsMap[ec],_subject:'Bratabandha RSVP — '+name})})
+  fetch('https://script.google.com/macros/s/AKfycbwXfkLyWIpq8HYdCMp4j484hXXs9d7RoDfsHIdkaEynuG9C-omiyeDoIKr0jjpvTwE/exec',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,guests:ec==='cant'?'0':guests,attendance:eventsMap[ec]})})
   .then(function(){
     var form=document.getElementById('rsvp-form'),succ=document.getElementById('rsvp-success');
     document.getElementById('s-name').textContent=name;
